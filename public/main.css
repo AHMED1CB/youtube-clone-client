@@ -1,0 +1,23 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+}
+
+body , #root{
+    width: 100vw;
+    height: fit-content;
+    font-family: 'roboto' , Arial, Helvetica, sans-serif;
+}
+
+
+.logo{
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+
+a{
+    color:#000 !important;
+    text-decoration: none;
+}
