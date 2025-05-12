@@ -3,13 +3,12 @@
 import Container from '@mui/material/Container';
 import FlexBox from './mui/FlexBox';
 import IconButton from '@mui/material/IconButton';
-import { Search } from '@mui/icons-material';
-import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 
 // # ANOTHER 
 import Logo from '/logo.png'
 import '../styles/Header.css'
 import { Link } from 'react-router-dom';
+import Icon from './Icon';
 
 export default () => {
 
@@ -27,13 +26,13 @@ export default () => {
                 <FlexBox styles={{width:'40%'}}>
                     <input type="text" placeholder="Search"  className="searchField" name="search"/>
                     <IconButton className="search-icon">
-                        <Search />
+                        <Icon icon="magnifying-glass"/>
                     </IconButton>
                 </FlexBox>
 
                 <FlexBox styles={{width:'fit-content'}}>
                     <IconButton className="icon-mode">
-                         <DarkModeOutlinedIcon/>
+                         <Icon icon="moon"/>
                     </IconButton>
                 </FlexBox>
 
