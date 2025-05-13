@@ -41,6 +41,9 @@ const darkTheme = createTheme({
                     background: #fff;
                     color:#000
                 }
+                header{
+                    background:#121212
+                }
             
             `) 
             
@@ -89,6 +92,10 @@ const lightTheme = createTheme({
                     background: #eee;
                 }
             
+                header{
+                    background:#fff
+                }
+
             `) 
             
         },

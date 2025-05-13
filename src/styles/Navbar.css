@@ -2,15 +2,13 @@ nav.navbar{
     width: 90px;
     color: #fff;
     padding:12px;
-    height: calc(100vh - 62px);
+    height: 100%;
     border-radius: 12px;    
-    position:fixed;
-    top:62px;
     overflow: hidden;
+    transition: width .4s  ;
 }
 
 nav.navbar.expanded{
-    transition: width .4s  ;
     width: 40vh;
 }
 
