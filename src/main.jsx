@@ -3,22 +3,21 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 
 
-// # REACT ROUTER
-
+// # Router
 import { BrowserRouter as Router } from 'react-router-dom';
-import { CssBaseline, ThemeProvider } from '@mui/material';
-import { getModeTheme } from './app/Theme';
 
-
+// # Redux
+import { Provider } from 'react-redux';
+import { store } from './app/Store';
 
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router> 
-        
-             <App />
-        
+      <Provider store={store}>
+          <App />
+      </Provider>
     </Router>
   </React.StrictMode>
 )

@@ -1,9 +1,11 @@
 import NavLink from "./NavLink"
 import '../styles/Navbar.css';
-import { useContext } from "react";
-import { NavContext } from "../contexts/Navbar";
+import { useSelector } from 'react-redux'
 
 export default () => {
+
+    const {expanded} = useSelector((state) => state.display );
+
 
     const path = location.pathname;
 
@@ -17,7 +19,6 @@ export default () => {
     ]
 
 
-    const {expanded , setExpanded} = useContext(NavContext);
 
     const navLinksContent = links.map((link , index) => {
         return (

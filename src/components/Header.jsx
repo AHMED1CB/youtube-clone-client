@@ -9,28 +9,27 @@ import Logo from '/logo.png'
 import '../styles/Header.css'
 import { Link } from 'react-router-dom';
 import Icon from './Icon';
-import { useContext } from 'react';
-import { modeContext } from '../contexts/Mode';
-import { NavContext } from "../contexts/Navbar";
+import { useSelector , useDispatch} from 'react-redux'
+import { setMode , setExpanded } from '../features/Display/DisplaySlice';
 
 export default () => {
 
-    const {mode , setMode} = useContext(modeContext);
-    const {setExpanded} = useContext(NavContext);
+    // const {mode , setMode} = useContext(modeContext);
+    // const {setExpanded} = useContext(NavContext);
+
+    const {mode , expanded} = useSelector((state) => state.display );
+    
+    const dispatch = useDispatch();
 
     function changeMode(){
-        if (mode != 'light'){
-            setMode('light')
-            localStorage.mode = 'light';
-        }else{
-            setMode('dark')
-            localStorage.mode = 'dark';
-        }
+        
+        dispatch(setMode(mode)); // We Check in Slice 
+
     }
 
 
     function changeMenuExpand(){
-        setExpanded(o => !o)
+        dispatch(setExpanded(!expanded))
     }
 
     return (

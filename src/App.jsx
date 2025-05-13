@@ -3,35 +3,22 @@ import { Routes , Route } from 'react-router-dom';
 import  HomePage from './components/HomePage';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { getModeTheme } from './app/Theme';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { modeContext } from './contexts/Mode';
-import { NavContext } from "./contexts/Navbar"
+import { useSelector} from 'react-redux'
+
 
 
 
 function App() {
 
-  const [mode , setMode] = useState(null);
-  const [expanded , setExpanded] = useState(false);
+  const mode = useSelector((state) => state.display.mode );
+  
 
-
-  useEffect(() => {
-    let currentMode = localStorage.mode ?? 'light';
-    setMode(currentMode)
-  }, [])
-
-
-  return mode && (
+  return  (
     <ThemeProvider theme={getModeTheme(mode)}>
       <CssBaseline>
-        <NavContext.Provider value={{expanded , setExpanded}}>
-          <modeContext.Provider value={{mode , setMode}}>
-                <Routes> 
+              <Routes> 
                     <Route path='/' element={<HomePage/>} />
-                </Routes>
-          </modeContext.Provider>
-        </NavContext.Provider>
+              </Routes>
       </CssBaseline>
   </ThemeProvider>
    
