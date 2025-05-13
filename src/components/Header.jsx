@@ -11,10 +11,12 @@ import { Link } from 'react-router-dom';
 import Icon from './Icon';
 import { useContext } from 'react';
 import { modeContext } from '../contexts/Mode';
+import { NavContext } from "../contexts/Navbar";
 
 export default () => {
 
     const {mode , setMode} = useContext(modeContext);
+    const {setExpanded} = useContext(NavContext);
 
     function changeMode(){
         if (mode != 'light'){
@@ -26,11 +28,16 @@ export default () => {
         }
     }
 
+
+    function changeMenuExpand(){
+        setExpanded(o => !o)
+    }
+
     return (
         <header className="header">
             <Container fixed sx={{display:'flex',justifyContent:'space-between' , alignItems:'center',gap:'20px'}}>
 
-                    <IconButton className="list-icon">
+                    <IconButton className="list-icon" onClick={changeMenuExpand}>
                         <Icon icon="list"/>
                     </IconButton>
 

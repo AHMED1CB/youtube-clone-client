@@ -6,9 +6,11 @@ nav.navbar{
     border-radius: 12px;    
     position:fixed;
     top:62px;
+    overflow: hidden;
 }
 
 nav.navbar.expanded{
+    transition: width .4s  ;
     width: 40vh;
 }
 
@@ -28,7 +30,6 @@ nav.navbar ul > li {
     align-items: center;
 
 }
-
 
 
 nav.navbar ul > li a{

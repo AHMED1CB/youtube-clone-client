@@ -1,5 +1,7 @@
 import NavLink from "./NavLink"
 import '../styles/Navbar.css';
+import { useContext } from "react";
+import { NavContext } from "../contexts/Navbar";
 
 export default () => {
 
@@ -15,17 +17,19 @@ export default () => {
     ]
 
 
+    const {expanded , setExpanded} = useContext(NavContext);
 
     const navLinksContent = links.map((link , index) => {
         return (
-            <NavLink key={index} {...link} filled={path == link.path} showText /> 
+            <NavLink key={index} {...link} filled={path == link.path} showText={expanded} /> 
         )
     })
     
 
 
+
     return (
-        <nav className={"navbar expanded"}> 
+        <nav className={`navbar ${expanded ? 'expanded' : ''}`}> 
 
             <ul className="links">                
 
