@@ -15,13 +15,17 @@ export default () => {
     return (
         <header className="header">
             <Container fixed sx={{display:'flex',justifyContent:'space-between' , alignItems:'center',gap:'20px'}}>
-                
-                    <Link className="logo" to="/">
-                        <FlexBox styles={{gap:'8px', width:'25%'}} >
-                            <img src={Logo} alt="youtube-logo" className="logoImage"  /> 
-                            <h2 className="logoText">Youtube</h2>
-                        </FlexBox>
-                    </Link>
+
+                    <IconButton className="list-icon">
+                        <Icon icon="list"/>
+                    </IconButton>
+
+                <Link className="logo" to="/">
+                     <FlexBox styles={{gap:'8px', width:'25%'}} >
+                        <img src={Logo} alt="youtube-logo" className="logoImage"  /> 
+                        <h2 className="logoText">Youtube</h2>
+                    </FlexBox>
+                </Link>
 
                 <FlexBox styles={{width:'40%'}}>
                     <input type="text" placeholder="Search"  className="searchField" name="search"/>
