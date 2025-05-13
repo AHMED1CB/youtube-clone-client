@@ -4,6 +4,8 @@ nav.navbar{
     padding:12px;
     height: calc(100vh - 62px);
     border-radius: 12px;    
+    position:fixed;
+    top:62px;
 }
 
 nav.navbar.expanded{
@@ -35,6 +37,7 @@ nav.navbar ul > li a{
     gap:30px;
     align-items:center;
     justify-content: center;
+    transition:.3s;
 }
 nav.navbar ul > li.show a{
     justify-content: initial !important;
@@ -54,8 +57,7 @@ nav.navbar ul > li i + span{
 }
 
 
-li.active a{
-    background: #eee;
+li.active a ,  li:hover a {
     padding:10px;
     border-radius:12px;
 }

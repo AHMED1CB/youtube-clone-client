@@ -9,8 +9,22 @@ import Logo from '/logo.png'
 import '../styles/Header.css'
 import { Link } from 'react-router-dom';
 import Icon from './Icon';
+import { useContext } from 'react';
+import { modeContext } from '../contexts/Mode';
 
 export default () => {
+
+    const {mode , setMode} = useContext(modeContext);
+
+    function changeMode(){
+        if (mode != 'light'){
+            setMode('light')
+            localStorage.mode = 'light';
+        }else{
+            setMode('dark')
+            localStorage.mode = 'dark';
+        }
+    }
 
     return (
         <header className="header">
@@ -35,8 +49,8 @@ export default () => {
                 </FlexBox>
 
                 <FlexBox styles={{width:'fit-content'}}>
-                    <IconButton className="icon-mode">
-                         <Icon icon="moon"/>
+                    <IconButton className="icon-mode" onClick={changeMode}>
+                         <Icon icon="moon" filled={mode != 'light'}/>
                     </IconButton>
                 </FlexBox>
 

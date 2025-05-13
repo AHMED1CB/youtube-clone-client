@@ -24,7 +24,6 @@ header{
     font-size: 17px;
     border:1px solid #d5d5d5;
     transition: .3s;
-    background: #fffbfb !important;
     border-right-color: transparent;
     height: 40px;
 
@@ -36,8 +35,7 @@ header{
     border-radius:  0  8px 8px 0 ;
     border:1px solid #d5d5d5;
     transition: .3s;
-    border-left-color: transparent;
-    background: #fffbfb !important;
+    /* background: #fffbfb !important; */
     height: 40px;
     outline:none;
 }

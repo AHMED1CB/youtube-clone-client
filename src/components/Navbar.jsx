@@ -18,14 +18,14 @@ export default () => {
 
     const navLinksContent = links.map((link , index) => {
         return (
-            <NavLink key={index} {...link} filled={path == link.path} /> 
+            <NavLink key={index} {...link} filled={path == link.path} showText /> 
         )
     })
     
 
 
     return (
-        <nav className={"navbar"}> 
+        <nav className={"navbar expanded"}> 
 
             <ul className="links">                
 
