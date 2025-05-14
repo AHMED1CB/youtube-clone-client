@@ -1,14 +1,18 @@
 import NavLink from "./NavLink"
 import '../styles/Navbar.css';
-import { useSelector } from 'react-redux'
-
+import { useSelector ,  useDispatch } from 'react-redux'
+import { setExpanded } from '../features/Display/DisplaySlice.js';
+import { useLocation } from "react-router-dom";
 export default () => {
 
     const {expanded} = useSelector((state) => state.display );
+    const dispatch = useDispatch();
 
+    const path = useLocation().pathname;
 
-    const path = location.pathname;
-
+    const isActive = (target) => {
+        return path === target ? 'active' : '' ;
+    }
     const links = [
             {icon: 'house'  ,        path: '/' ,            text : 'Home'  },
             {icon: 'binoculars' ,    path: '/explore' ,     text : 'Explore'  },
@@ -22,15 +26,18 @@ export default () => {
 
     const navLinksContent = links.map((link , index) => {
         return (
-            <NavLink key={index} {...link} filled={path == link.path} showText={expanded} /> 
+            <NavLink key={index} {...link} filled={isActive(link.path)} showText={expanded} /> 
         )
     })
     
 
 
+    function expandMenu(state){
+        dispatch(setExpanded(state))
+    }
 
     return (
-        <nav className={`navbar ${expanded ? 'expanded' : ''}`}> 
+        <nav className={`navbar ${expanded ? 'expanded' : ''}`} onMouseEnter={() => {expandMenu(true)}} onMouseLeave={() => {expandMenu(false)}}> 
 
             <ul className="links">                
 

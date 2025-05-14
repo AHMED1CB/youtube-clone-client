@@ -18,7 +18,7 @@ export default () => {
 
                     component="img"
              
-                    image={'https://picsum.photos/150/200'}
+                    image={'https://loremflickr.com/320/240'}
              
                     alt={'dev'}
                 />
