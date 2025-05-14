@@ -36,9 +36,9 @@ export default () => {
         <header className="header">
             <Container fixed sx={{display:'flex',justifyContent:'space-between' , alignItems:'center',gap:'20px'}}>
 
-                    <IconButton className="list-icon" onClick={changeMenuExpand}>
-                        <Icon icon="list"/>
-                    </IconButton>
+                {/* <IconButton className="list-icon" onClick={changeMenuExpand}>
+                    <Icon icon="list"/>
+                </IconButton> */}
 
                 <Link className="logo" to="/">
                      <FlexBox styles={{gap:'8px', width:'25%'}} >

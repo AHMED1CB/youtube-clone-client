@@ -44,6 +44,12 @@ const darkTheme = createTheme({
                 header{
                     background:#121212
                 }
+
+                                
+                .explore-filters .filterButton.active{
+                    background-color: #fff;
+                    color: #000;
+                }
             
             `) 
             
@@ -94,6 +100,21 @@ const lightTheme = createTheme({
             
                 header{
                     background:#fff
+                }
+
+
+                .explore-filters .filterButton.active{
+                    background-color: #121212;
+                    color: #fff;
+                }
+
+                .explore-filters .filterButton{
+                    color: #000;
+                }
+
+                .time{
+                    color:#000;
+                    background:#fff !important
                 }
 
             `) 
