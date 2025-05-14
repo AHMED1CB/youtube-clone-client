@@ -19,7 +19,7 @@ export default () => {
 
                     component="img"
              
-                    image={'https://loremflickr.com/320/240'}
+                    image={'https://picsum.photos/600/400'}
              
                     alt={'dev'}
                 />
@@ -29,19 +29,23 @@ export default () => {
 
              <CardContent className="card-video-content">
                 <FlexBox className="video-details" >
-                        <Avatar src={'Dev'} alt={'dev Channel'} className="avatar-image" />
+                        <Avatar src={'https://picsum.photos/50/50'} alt={'dev Channel'} className="avatar-image" />
                         <Typography
                                 variant="title"
                                 fontWeight="bold"
                                 sx={{
                                     display: "-webkit-box",
-                                WebkitLineClamp: 2,
+                                WebkitLineClamp: 1,
                                 WebkitBoxOrient: "vertical",
                                 overflow: "hidden",
+                                
                             }}
                                 className="video-title" 
                         >
-                                A Day Of Developper
+
+                            Lorem ipsum dolor sit amet consectetur
+                             adipisicing elit. Tenetur, neque? 
+                             
                     </Typography>
                 </FlexBox>
                 

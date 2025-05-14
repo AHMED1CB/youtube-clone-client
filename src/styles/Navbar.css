@@ -9,7 +9,7 @@ nav.navbar{
 }
 
 nav.navbar.expanded{
-    width: 40vh;
+    width: 300px !important;
 }
 
 nav.navbar ul{

@@ -1,7 +1,23 @@
 import Filter from './ExploreFilter';
 
-
 export default () => {
+
+    // # Will Replace Later With Dynamic Data From Api
+    const filters = [ 
+        {id : 0 , icon : 'user' , text: 'For You'},
+        {id : 1 , icon : 'fire' , text: 'Trending'},
+        {id : 2 , icon : 'game-controller' , text: 'Gaming'},
+        {id : 3 , icon : 'newspaper-clipping' , text: 'News'},
+        {id : 4 , icon : 'student' , text: 'Learning'},
+        {id : 5 , icon : 'brackets-angle' , text: 'Technology'},
+    ] 
+
+
+    const filtersContent = filters.map(filter => {
+            return (
+                <Filter key={filter.id} {...filter} active={filter.id == 0}/>
+            )
+    })
 
     return (
         <div className="explore-header">
@@ -13,14 +29,10 @@ export default () => {
                     
                     </p>
                 </div>
+
                 <div className="explore-filters">
 
-                      <Filter icon="user" text="For You" isActive/>
-                      <Filter icon="fire" text="Trending"/>
-                      <Filter icon="game-controller" text="Gaming"/>
-                      <Filter icon="newspaper-clipping" text="News"/>
-                      <Filter icon="student" text="Learning"/>
-                      <Filter icon="brackets-angle" text="Technology"/>
+                    {filtersContent}
 
                 </div>
         </div>

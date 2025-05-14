@@ -1,7 +1,7 @@
 import '../styles/Explore.css';
 import ExploreHeader from './ExploreHeader';
 import Videos from './Videos';
-import {  Container } from '@mui/material'
+import { Container } from '@mui/material'
 export default () => {
     return (
         <main className="explore-page">

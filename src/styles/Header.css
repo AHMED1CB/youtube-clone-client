@@ -47,3 +47,8 @@ header{
 .searchField:focus , .search-icon:hover {
     border:1px solid #8f8c8c;
 }
+
+
+.icon-mode{
+    font-size: 28px !important;
+}
