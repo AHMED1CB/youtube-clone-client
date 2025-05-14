@@ -1,4 +1,3 @@
-
 .videos-section{
     overflow: auto;
     width:100%;
@@ -15,13 +14,23 @@
 }
 
 .videos-container > div{
-    max-height: 350px;
-
+    max-height: 450px;
+    cursor: pointer;
 }
 
 .video-cover{
     width:100%;
     height:50%;
+    position:relative;
+}
+.video-cover .time{
+    position: absolute;
+    top:80%;
+    right:1%;
+    background-color: rgb(22, 21, 21);
+    width:fit-content;
+    padding:5px 10px;
+    border-radius: 12px;
 }
 .videos-container .videoCard img {
     width:100%;
@@ -31,26 +40,26 @@
 }
 
 .video-title{
-    margin: 10px !important;
     display:block !important;
 }
 
 .card-video-content{
     padding:0 !important;
     width:100%;
+    margin-top:12px
 }
 
 
-.channel-details{
+.video-details{
     justify-content: space-between !important;
     width:fit-content;
     gap:12px;
     margin-bottom: 7px;
-    margin-left: 10px !important;
 }
 
-.video-details{
-    margin-left: 10px !important;
-    display:block
 
+.video-footer-details{
+    margin-left: 50px ;
+    flex-direction: column;
+    margin-top: 12px;
 }
