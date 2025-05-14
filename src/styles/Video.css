@@ -14,7 +14,7 @@
 }
 
 .videos-container > div{
-    max-height: 450px;
+    max-height: 350px;
     cursor: pointer;
 }
 
