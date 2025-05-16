@@ -9,7 +9,7 @@ nav.navbar{
 }
 
 nav.navbar.expanded{
-    width: 300px !important;
+    width: 300px;
 }
 
 nav.navbar ul{
@@ -59,4 +59,37 @@ nav.navbar ul > li i + span{
 li.active a ,  li:hover a {
     padding:10px;
     border-radius:12px;
+}
+
+
+@media(max-width:767px){
+    nav.navbar , nav.expanded{
+        width:100vw !important;
+        height:fit-content !important;
+        background-color: #121212;
+        position: fixed;
+        bottom:0;
+        left:0;
+        z-index: 2;
+        border-radius: 30px 30px  0 0 ;
+    }
+
+    nav.navbar ul{
+        flex-direction: row;
+        align-items: center;
+        width:95%;
+        margin:auto
+    }
+
+    nav.navbar ul span{
+        display:none !important
+    }
+
+
+    nav.navbar ul > li , nav.navbar ul > li:hover  {
+        width: initial !important;
+    
+    }
+    
+
 }

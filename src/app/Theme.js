@@ -49,6 +49,13 @@ const darkTheme = createTheme({
                     background-color: #fff;
                     color: #000;
                 }
+
+
+                @media(max-width:767px){
+                    nav.navbar , nav.expanded{
+                        background-color: #121212;
+                    }
+                }
             
             `) 
             
@@ -114,6 +121,12 @@ const lightTheme = createTheme({
                 .time{
                     color:#000;
                     background:#fff !important
+                }
+
+                @media(max-width:767px){
+                    nav.navbar , nav.expanded{
+                        background-color: #fff;
+                    }
                 }
 
             `) 
