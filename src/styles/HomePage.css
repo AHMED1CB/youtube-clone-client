@@ -1,0 +1,14 @@
+.home-page{
+    padding:12px;
+    overflow: auto;
+    width:100%;
+}
+
+.homepage-content{
+    width: 100%;
+    height:fit-content;
+    overflow: hidden;
+    display:flex;
+    flex-direction: column;
+    justify-self: space-between;
+}

@@ -26,9 +26,10 @@ header{
     width: 90%;
     border-radius: 8px 0 0 8px;
     font-size: 17px;
-    border:1px solid #d5d5d5;
+    border:1px solid var(--border);
     transition: .3s;
     border-right-color: transparent;
+    background-color: var(--bg);
     height: 40px;
 
 }
@@ -37,7 +38,7 @@ header{
 .searchField + .search-icon{
     width: 70px;
     border-radius:  0  8px 8px 0 ;
-    border:1px solid #d5d5d5;
+    border:1px solid var(--border);
     transition: .3s;
     /* background: #fffbfb !important; */
     height: 40px;
@@ -45,7 +46,7 @@ header{
 }
 
 .searchField:focus , .search-icon:hover {
-    border:1px solid #8f8c8c;
+    border:1px solid var(--border);
 }
 
 

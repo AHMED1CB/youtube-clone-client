@@ -29,6 +29,7 @@
 }
 
 .subscriptions-header .channels > div.active , .channels > div:hover {
-    background-color: #fff;
-    color:#121212;
+    background-color: var(--activeBg);
+    color:var(--activeText);
 }
+

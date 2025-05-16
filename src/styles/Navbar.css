@@ -1,6 +1,6 @@
 nav.navbar{
     width: 90px;
-    color: #fff;
+    color: var(--text);
     padding:12px;
     height: 100%;
     border-radius: 12px;    
@@ -43,7 +43,7 @@ nav.navbar ul > li.show a{
 }
 
 nav.navbar ul > li i{
-    font-size: 32px;
+    font-size: 32px ;
     text-align: center;
     vertical-align: middle;
     
@@ -62,11 +62,18 @@ li.active a ,  li:hover a {
 }
 
 
+li.active a  {
+    background-color: var(--activeNavLinkBg);
+    color: var(--activeNavLinkText);
+}
+
+
+
 @media(max-width:767px){
     nav.navbar , nav.expanded{
         width:100vw !important;
         height:fit-content !important;
-        background-color: #121212;
+        background-color: var(--bg);
         position: fixed;
         bottom:0;
         left:0;

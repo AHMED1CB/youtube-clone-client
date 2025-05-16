@@ -40,7 +40,7 @@
 .explore-header .explore-info p{
     margin:auto;
     text-align:center;
-    color: #909090;
+    color: var(--info);
     font-size: 16px;
     line-height:1.6
 }
@@ -76,3 +76,7 @@
     font-size: 20px;
 }
 
+.explore-filters .filterButton.active{
+    background-color: var(--activeBg);
+    color: var(--activeText);
+}

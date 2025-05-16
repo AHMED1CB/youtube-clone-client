@@ -16,52 +16,15 @@ const darkTheme = createTheme({
     components: {
         MuiCssBaseline: {
             styleOverrides : (theme) => (`
-                a {
-                    color:#fff ;
-                    text-decoration:none;
-                }
 
-                li:not(.active) a:hover{
-                    color:#fff;
-                }
-
-                input , button{
-                    color:#fff;
-                    background:transparent;
-                    border-color:#fff
-                }
-
-                button{
-                     border-left-color: transparent;
-
-                }
-
-                .active a{
-                    background: #fff;
-                    color:#000
-                }
-                header{
-                    background:#121212
-                }
-
-                                
-                .explore-filters .filterButton.active{
-                    background-color: #fff;
-                    color: #000;
-                }
-
-
-                @media(max-width:767px){
-                    nav.navbar , nav.expanded{
-                        background-color: #121212;
-                    }
-                }
-
-
-                
-                .subscriptions-header .channels > div.active , .channels > div:hover {
-                    background-color: #fff;
-                    color:#121212;
+                :root{
+                    --text:#fff;
+                    --bg:#121212;
+                    --info:#909090;
+                    --activeBg:#fff;
+                    --activeText:#121212;
+                    --activeNavLinkBg:#fff;
+                    --activeNavLinkText:#121212
                 }
 
             
@@ -93,56 +56,15 @@ const lightTheme = createTheme({
     components: {
         MuiCssBaseline: {
             styleOverrides : (theme) => (`
-                a{
-                    color:#000;
-                    text-decoration:none;
-                }
-                input , button{
-                    color:#000;
-                    background:transparent;
-                    border-color:#000
-                }
-
-                button{
-                     border-left-color: transparent;
-
-                }
-
-                .active a{
-                    background: #eee;
-                }
-            
-                header{
-                    background:#fff
-                }
-
-
-                .explore-filters .filterButton.active{
-                    background-color: #121212;
-                    color: #fff;
-                }
-
-                .explore-filters .filterButton{
-                    color: #000;
-                }
-
-                .time{
-                    color:#000;
-                    background:#fff !important
-                }
-
-                @media(max-width:767px){
-                    nav.navbar , nav.expanded{
-                        background-color: #fff;
-                    }
-                }
-
-
-                .subscriptions-header .channels > div.active , .channels > div:hover {
-                    background-color: #121212;
-                    color:#fff;
-                }
-
+            :root{
+                --text:#121212;
+                --bg:#fff;
+                --info:#909090;
+                --activeBg:#121212;
+                --activeText:#fff;
+                 --activeNavLinkBg:#eee;
+                --activeNavLinkText:#121212
+            }
             `) 
             
         },
@@ -165,3 +87,4 @@ function getModeTheme(mode){
 
 
 export {  getModeTheme }
+

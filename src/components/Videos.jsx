@@ -11,6 +11,9 @@ export default () => {
                 <VideoCard/>
                 <VideoCard/>
                 <VideoCard/>
+                <VideoCard/>
+                <VideoCard/>
+                <VideoCard/>
             </Container>
         </main>
     )

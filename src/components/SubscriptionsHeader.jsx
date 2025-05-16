@@ -8,7 +8,7 @@ export default  () => {
                     
                     <FlexBox className="channels">
 
-                        <ChannelCard channelName="First Developper"/>
+                        <ChannelCard channelName="First Developper" active={true}/>
                         <ChannelCard channelName="Second Developper"/>
                         <ChannelCard channelName="Third Developper"/>
                         <ChannelCard channelName="4th Developper"/>
