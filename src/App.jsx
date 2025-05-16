@@ -7,6 +7,7 @@ import { useSelector} from 'react-redux'
 import HomePage from './components/HomePage';
 import Explore from './components/Explore';
 import MainLayout from './layouts/MainLayout';
+import Subscriptions from './components/Subscriptions';
 
 
 
@@ -24,6 +25,11 @@ function App() {
                     <Route index element={<HomePage/>} />
                     <Route path='explore' element={<Explore/>} />
                 </Route>
+
+                <Route path="/feed" element={<MainLayout/>}>
+                    <Route path="subscriptions" element={<Subscriptions/>} />
+                </Route>
+              
               </Routes>
       </CssBaseline>
   </ThemeProvider>

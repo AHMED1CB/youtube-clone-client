@@ -16,7 +16,7 @@ export default () => {
     const links = [
             {icon: 'house'  ,        path: '/' ,            text : 'Home'  },
             {icon: 'binoculars' ,    path: '/explore' ,     text : 'Explore'  },
-            {icon: 'users' ,         path: '/subscriptions',text : 'Subscriptions'  },
+            {icon: 'users' ,         path: '/feed/subscriptions',text : 'Subscriptions'  },
             {icon: 'monitor-play'  , path: '/shorts' ,      text : 'Shorts'  },
             {icon: 'clock-counter-clockwise'   ,            path: '/history' , text : 'History'  },
             {icon: 'user-circle' ,   path:'/soon' ,         text : 'Profile'  },

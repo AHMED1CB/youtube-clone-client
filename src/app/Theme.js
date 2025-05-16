@@ -56,6 +56,14 @@ const darkTheme = createTheme({
                         background-color: #121212;
                     }
                 }
+
+
+                
+                .subscriptions-header .channels > div.active , .channels > div:hover {
+                    background-color: #fff;
+                    color:#121212;
+                }
+
             
             `) 
             
@@ -127,6 +135,12 @@ const lightTheme = createTheme({
                     nav.navbar , nav.expanded{
                         background-color: #fff;
                     }
+                }
+
+
+                .subscriptions-header .channels > div.active , .channels > div:hover {
+                    background-color: #121212;
+                    color:#fff;
                 }
 
             `) 

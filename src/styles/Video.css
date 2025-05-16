@@ -25,8 +25,8 @@
 }
 .video-cover .time{
     position: absolute;
-    top:80%;
-    right:1%;
+    top:calc(100% - 40px);
+    right:10px;
     background-color: rgb(22, 21, 21);
     width:fit-content;
     padding:5px 10px;
