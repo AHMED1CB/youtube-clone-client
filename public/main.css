@@ -1,12 +1,15 @@
 :root{
     --text:#fff;
     --bg:#121212;
-    --info:#909090;
+    --info:#ddd;
     --activeBg:#fff;
     --activeText:#121212;
     --border:#d5d5d5;
     --activeNavLinkBg: #eee;
-    --activeNavLinkText:#121212
+    --activeNavLinkText:#121212;
+    --actionBg:rgba(255, 255, 255, 0.1);
+    --subscribe:#dd4e4e
+
 }
 
 

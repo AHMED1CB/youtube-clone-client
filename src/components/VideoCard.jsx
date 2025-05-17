@@ -28,7 +28,7 @@ export default () => {
              </div>
 
              <CardContent className="card-video-content">
-                <FlexBox className="video-details" >
+                <FlexBox className="video-details"  >
                         <Avatar src={'https://picsum.photos/50/50'} alt={'dev Channel'} className="avatar-image" />
                         <Typography
                                 variant="title"
