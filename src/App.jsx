@@ -8,7 +8,7 @@ import HomePage from './components/HomePage';
 import Explore from './components/Explore';
 import MainLayout from './layouts/MainLayout';
 import Subscriptions from './components/Subscriptions';
-import ShortVideos from './components/ShortVideos';
+import ShortsPage from './components/ShortVideos';
 
 
 
@@ -29,7 +29,7 @@ function App() {
 
                 <Route path="/feed" element={<MainLayout/>}>
                     <Route path="subscriptions" element={<Subscriptions/>} />
-                    <Route path="shorts" element={<ShortVideos/>} />
+                    <Route path="shorts" element={<ShortsPage/>} />
                 </Route>
               
               </Routes>

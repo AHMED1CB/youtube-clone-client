@@ -1,4 +1,4 @@
-import  '../styles/Subscriptions.css'
+import  '../styles/subscriptions.css'
 import SubscriptionsHeader from './SubscriptionsHeader'
 import Videos from './Videos'
 
