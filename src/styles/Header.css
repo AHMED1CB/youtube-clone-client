@@ -31,6 +31,7 @@ header{
     border-right-color: transparent;
     background-color: var(--bg);
     height: 40px;
+    color: var(--text);
 
 }
 

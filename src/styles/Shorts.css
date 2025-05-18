@@ -92,12 +92,12 @@
     font-weight: bold;
 }
 
-.actions button{
+.shortVideos-page .actions button{
     background:var(--subscribe);
     color:#fff;
 }
 
-.actions button:hover{
+.shortVideos-page .actions button:hover{
     background-color:#f00
 }
 .shorts > div .video .video-content{

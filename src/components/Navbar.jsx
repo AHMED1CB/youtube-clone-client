@@ -15,10 +15,10 @@ export default () => {
     }
     const links = [
             {icon: 'house'  ,        path: '/' ,            text : 'Home'  },
-            {icon: 'binoculars' ,    path: '/explore' ,     text : 'Explore'  },
+            {icon: 'binoculars' ,    path: '/feed/explore' ,     text : 'Explore'  },
             {icon: 'users' ,         path: '/feed/subscriptions',text : 'Subscriptions'  },
             {icon: 'monitor-play'  , path: '/feed/shorts' ,      text : 'Shorts'  },
-            {icon: 'clock-counter-clockwise'   ,            path: '/history' , text : 'History'  },
+            {icon: 'clock-counter-clockwise'   ,            path: '/feed/history' , text : 'History'  },
             {icon: 'user-circle' ,   path:'/soon' ,         text : 'Profile'  },
     ]
 

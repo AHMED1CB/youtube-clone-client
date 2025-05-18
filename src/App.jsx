@@ -9,6 +9,7 @@ import Explore from './components/Explore';
 import MainLayout from './layouts/MainLayout';
 import Subscriptions from './components/Subscriptions';
 import ShortsPage from './components/ShortVideos';
+import History from './components/History';
 
 
 
@@ -24,12 +25,13 @@ function App() {
               <Routes> 
                 <Route path="/" element={<MainLayout/>}>
                     <Route index element={<HomePage/>} />
-                    <Route path='explore' element={<Explore/>} />
                 </Route>
 
                 <Route path="/feed" element={<MainLayout/>}>
                     <Route path="subscriptions" element={<Subscriptions/>} />
                     <Route path="shorts" element={<ShortsPage/>} />
+                    <Route path='explore' element={<Explore/>} />
+                    <Route path='history' element={<History/>} />
                 </Route>
               
               </Routes>
