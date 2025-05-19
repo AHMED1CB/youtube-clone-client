@@ -73,6 +73,7 @@ li.active a  {
     nav.navbar , nav.expanded{
         width:100vw !important;
         height:fit-content !important;
+        max-height: 80px;
         background-color: var(--bg);
         position: fixed;
         bottom:0;

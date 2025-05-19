@@ -2,6 +2,7 @@ import { Container, IconButton } from "@mui/material"
 import Icon from "./Icon"
 import Videos from "./Videos"
 import  '../styles/History.css';
+import SearchField from "./mui/SearchField";
 export default () => {
     return (
         <main className="history-page">
@@ -10,10 +11,7 @@ export default () => {
                     <div className="actions">
                         
                         <div className="action action-search">
-                            <input type="text" className="search-history-input searchField" placeholder="Search History"/>
-                            <IconButton className="search-icon" >
-                                <Icon icon={'magnifying-glass'}/>
-                            </IconButton>
+                            <SearchField/>
                         </div>
 
                         <div className="action">

@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import Icon from './Icon';
 import { useSelector , useDispatch } from 'react-redux'
 import { setMode } from '../features/Display/DisplaySlice';
+import SearchField from './mui/SearchField';
 
 export default () => {
 
@@ -53,12 +54,7 @@ export default () => {
 
                 <FlexBox styles={{width:'40%'}}>
                     
-                    <input type="text" placeholder="Search"  className="searchField" name="search"/>
-                    <IconButton className="search-icon">
-                    
-                        <Icon icon="magnifying-glass"/>
-                    
-                    </IconButton>
+                        <SearchField/>
 
                 </FlexBox>
 
