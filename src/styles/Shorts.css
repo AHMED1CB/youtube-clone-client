@@ -1,5 +1,4 @@
 .shortVideos-page{
-    padding:12px;
     overflow: auto;
     width:100%
 }
@@ -10,6 +9,7 @@
     display:flex;
     flex-direction: column;
     justify-self: space-between;
+    /*height: 100%;*/
     position: relative;
 }
 
@@ -26,8 +26,8 @@
 
 
 .shortVideos-page .shorts .video-shape{
-    width:60vw;
-    height:100%;
+    width:65vw;
+    height:calc(100vh - (80px));
 }
 .shortVideos-page .shorts .short-video{
     display:flex;
@@ -82,10 +82,6 @@
     gap:20px
 }
 
-.channel-details .content .channel-avatar{
-    width:58px;
-    height:58px ;
-}
 
 .channel-details .content .channel-avatar + span{
     font-size: 18px;
@@ -159,9 +155,10 @@
     
     .shorts .video-shape{
         width:70vw  !important;
-        height:70vh !important ;
-      
+        height:calc(100vh - (62px + 90px));
+
     }
+
 
 }
 
