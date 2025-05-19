@@ -150,13 +150,12 @@
 @media(max-width:767px){
     .shorts{
         align-items: start !important;
-        height:calc((100vh - 62px) - 80px) !important ;
+        height:calc((100vh - 62px) - 90px) !important ;
     }
     
     .shorts .video-shape{
-        width:70vw  !important;
+        width:80vw  !important;
         height:calc(100vh - (62px + 90px));
-
     }
 
 
