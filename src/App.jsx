@@ -10,6 +10,7 @@ import MainLayout from './layouts/MainLayout';
 import Subscriptions from './components/Subscriptions';
 import ShortsPage from './components/ShortVideos';
 import History from './components/History';
+import Channel from './components/Channel';
 
 
 
@@ -32,6 +33,12 @@ function App() {
                     <Route path="shorts" element={<ShortsPage/>} />
                     <Route path='explore' element={<Explore/>} />
                     <Route path='history' element={<History/>} />
+                </Route>
+                  
+                  {/* Replace Later With Dynamic Route */}
+
+                <Route path="/channel" element={<MainLayout/>}>
+                    <Route path="AHMED1CB" element={<Channel/>} />
                 </Route>
               
               </Routes>
