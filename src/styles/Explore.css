@@ -47,11 +47,11 @@
 
 .explore-filters{
     width:80%;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
     padding:12px;
     gap: 20px;
+    display:grid;
+    grid-template-columns: repeat(auto-fill , minmax(200px , 1fr));
+
 }
 
 
@@ -63,7 +63,6 @@
     padding:12px;
     justify-content: center;
     flex-grow: 1;
-    width:25%;
 }
 
 

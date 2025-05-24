@@ -5,7 +5,8 @@ export const displaySlice = createSlice({
     name: 'displaySlice',
     initialState: {
         mode: localStorage.mode ?? 'light',
-        expanded: false
+        expanded: false,
+        isLoading: true
     },
     reducers:{
         setMode: (state , action) => {
@@ -21,6 +22,10 @@ export const displaySlice = createSlice({
         },
         setExpanded: (state , action) => {
             state.expanded = action.payload;
+        },
+    
+        setLoading : (state , action) => {
+            state.isLoading = action.payload;
         }
     }
 })
@@ -28,7 +33,7 @@ export const displaySlice = createSlice({
 
 
 
-export const { setMode , setExpanded } = displaySlice.actions
+export const { setMode , setExpanded , setLoading} = displaySlice.actions
 
 export default displaySlice.reducer
 

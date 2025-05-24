@@ -22,6 +22,7 @@
     width:100%;
     height:50%;
     position:relative;
+
 }
 .video-cover .time{
     position: absolute;
@@ -32,7 +33,7 @@
     padding:5px 10px;
     border-radius: 12px;
 }
-.videos-container .videoCard img {
+.videos-container .videoCard img{
     width:100%;
     height:100%;
     border-radius: 12px;

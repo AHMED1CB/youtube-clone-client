@@ -98,6 +98,10 @@ li.active a  {
         width: initial !important;
     
     }
+
+    .sk-link{
+        height:60px !important
+    }
     
 
 }

@@ -2,7 +2,7 @@ import { Routes , Route } from 'react-router-dom';
 
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { getModeTheme } from './app/Theme';
-import { useSelector} from 'react-redux'
+import { useSelector , useDispatch} from 'react-redux'
 
 import HomePage from './components/HomePage';
 import Explore from './components/Explore';
@@ -12,13 +12,22 @@ import ShortsPage from './components/ShortVideos';
 import History from './components/History';
 import Channel from './components/Channel';
 
-
+import {setLoading} from './features/Display/DisplaySlice';
+import { useEffect } from 'react';
 
 
 function App() {
 
   const mode = useSelector((state) => state.display.mode );
   
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+        dispatch(setLoading(false))
+
+  } , [])
+
 
   return  (
     <ThemeProvider theme={getModeTheme(mode)}>
