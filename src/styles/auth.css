@@ -1,0 +1,71 @@
+.auth-contnet{
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.auth-contnet form{
+    display: flex;
+    flex-direction: column;
+    height:70%;
+    gap:8px;
+    width:70%;
+}
+
+.auth-contnet form .col{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-bottom: 12px;
+}
+
+.auth-contnet form .col input {
+    width:100% !important;
+    padding:10px 15px;
+    outline:none !important;
+
+}
+
+.auth-contnet form .col input  + fieldset{
+    border-color:var(--border) !important;
+}
+
+.submit-btn{
+    border-color: var(--subscribe) !important;
+    color: var(--subscribe) !important;
+}
+
+
+@media(max-width:767px){
+    
+.auth-contnet form{
+    width:100%;
+}
+
+.auth-contnet form .col{
+    flex-direction:row;
+    justify-content:space-between !important;
+}
+
+.auth-contnet form .col > div   {
+    width:48% !important;
+}
+
+.auth-contnet form .col > div input  {
+    width:100% !important;
+}
+
+}
+
+
+.link-auth{
+    margin-bottom: 8px;
+    transition: .3s;
+}
+
+.link-auth:hover{
+    text-decoration: underline ;
+}

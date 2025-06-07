@@ -14,6 +14,8 @@ import Channel from './components/Channel';
 
 import {setLoading} from './features/Display/DisplaySlice';
 import { useEffect } from 'react';
+import Login from './components/Login';
+import Register from './components/Register';
 
 
 function App() {
@@ -32,9 +34,15 @@ function App() {
   return  (
     <ThemeProvider theme={getModeTheme(mode)}>
       <CssBaseline>
-              <Routes> 
+              <Routes>
+
                 <Route path="/" element={<MainLayout/>}>
                     <Route index element={<HomePage/>} />
+                </Route>
+
+                <Route path="/auth" >
+                    <Route path="login" element={<Login/>} />
+                    <Route path="register" element={<Register/>} />
                 </Route>
 
                 <Route path="/feed" element={<MainLayout/>}>
