@@ -70,6 +70,8 @@
     display: flex;
     border-bottom: 1px solid var(--border);
     margin-bottom: 20px;
+    overflow: auto;
+    width:100%;
   }
   
   .channel-tab {

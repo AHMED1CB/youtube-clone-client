@@ -13,7 +13,7 @@ const ChannelPage = () => {
             <div className="channel-header">
             <div className="channel-info">
                 <div className="channel-avatar">
-                <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="channel" />
+                <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="channel" />
                 </div>
                 <div className="channel-details">
                 <h1>Ahmed Hassan</h1>
