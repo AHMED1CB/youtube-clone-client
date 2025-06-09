@@ -1,22 +1,6 @@
 import { createSlice , createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios';
-import { utils } from '../../app/utils';
 
-export const registerUser = createAsyncThunk(
-    'auth/register',
-    async (data, { rejectWithValue}) => {
-      try {
-        const response = await axios.post(utils.join('auth' , 'register') , data , {headers : {}} );
-        return response.data;
-      } catch (error) {
-        return rejectWithValue({
-            error : true,
-            errors: error.response?.data?.data?.errors || error.message 
-        });
-      }
-    }
-  );
-
+import {loginUser , registerUser} from './AuthServices';
 
 
 export const authSlice = createSlice({
@@ -35,7 +19,7 @@ export const authSlice = createSlice({
             localStorage.removeItem('token');
 
             state.token = '';
-            
+
             state.isAuth = false;
 
         },
@@ -62,7 +46,25 @@ export const authSlice = createSlice({
 
             builder.addCase(registerUser.rejected , (state , action) => {
                 state.isLoading = false;
-                console.log(action.payload)
+                state.errors = action.payload;
+            })
+
+            // login
+
+            builder.addCase(loginUser.pending , (state) => {
+                state.isLoading = true;
+                state.errors = null;
+            })
+
+            builder.addCase(loginUser.fulfilled , (state , action) => {
+                state.isLoading = false;
+                state.token = action.payload.data.token;
+                localStorage.setItem('token' , action.payload.data.token);
+                state.isAuth = true;
+            })
+
+            builder.addCase(loginUser.rejected , (state , action) => {
+                state.isLoading = false;
                 state.errors = action.payload;
             })
 

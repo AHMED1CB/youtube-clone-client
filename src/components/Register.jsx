@@ -7,7 +7,7 @@ import { useState } from "react";
 
 import {useDispatch , useSelector } from 'react-redux'
 
-import { registerUser } from "../features/auth/AuthSlice";
+import { registerUser } from "../features/auth/AuthServices";
 
 export default function Register () {
 
