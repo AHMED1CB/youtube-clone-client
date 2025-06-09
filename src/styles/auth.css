@@ -48,6 +48,7 @@
 .auth-contnet form .col{
     flex-direction:row;
     justify-content:space-between !important;
+    flex-wrap: all;
 }
 
 .auth-contnet form .col > div   {
@@ -68,4 +69,12 @@
 
 .link-auth:hover{
     text-decoration: underline ;
+}
+
+
+.error{
+    color:rgb(231, 33, 33);
+    display:block !important;
+    border-bottom: 1px solid var(--border);
+    padding:8px
 }
