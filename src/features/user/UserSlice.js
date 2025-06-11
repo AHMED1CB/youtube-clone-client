@@ -39,7 +39,8 @@ const userSlice = createSlice({
 
         builder.addCase(loadUser.rejected , (state , action) => {
             state.isLoading = false;
-            state.errors = action.payload.errors
+            state.errors = action.payload.errors;
+            localStorage.removeItem('token');
         }) 
 
         builder.addCase(loadUser.fulfilled , (state , action) => {
