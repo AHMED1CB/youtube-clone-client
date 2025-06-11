@@ -17,7 +17,6 @@ import { useEffect } from 'react';
 import Login from './components/Login';
 import Register from './components/Register';
 
-import { UserProvider } from './contexts/User';
 
 
 function App() {
@@ -37,7 +36,6 @@ function App() {
 
 
   return  (
-    <UserProvider>
 
         <ThemeProvider theme={getModeTheme(mode)}>
           <CssBaseline>
@@ -68,7 +66,6 @@ function App() {
                   </Routes>
           </CssBaseline>
       </ThemeProvider>
-  </UserProvider>
 
    
   )
