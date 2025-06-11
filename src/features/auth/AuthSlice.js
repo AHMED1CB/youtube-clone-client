@@ -11,7 +11,8 @@ export const authSlice = createSlice({
         user : '',
         isAuth: '',
         isLoading : false,
-        errors : null
+        errors : null,
+        status: 0
 
     },
     reducers:{
@@ -27,6 +28,10 @@ export const authSlice = createSlice({
 
         clearError : (state) => {
             state.errors = null;
+        },
+
+        resetStatus : (state) => {
+            state.status = 0;
         }
     
 
@@ -42,18 +47,19 @@ export const authSlice = createSlice({
 
             builder.addCase(registerUser.fulfilled , (state) => {
                 state.isLoading = false;
-            })
+                state.status = 200;
 
-            builder.addCase(registerUser.rejected , (state , action) => {
+            })
+            builder.addCase(registerUser.rejected, (state, action) => {
                 state.isLoading = false;
-                state.errors = action.payload;
-            })
-
+                state.errors = action.payload.errors || action.payload;
+            });
             // login
 
             builder.addCase(loginUser.pending , (state) => {
                 state.isLoading = true;
                 state.errors = null;
+                
             })
 
             builder.addCase(loginUser.fulfilled , (state , action) => {
@@ -61,6 +67,8 @@ export const authSlice = createSlice({
                 state.token = action.payload.data.token;
                 localStorage.setItem('token' , action.payload.data.token);
                 state.isAuth = true;
+                state.status = 200;
+
             })
 
             builder.addCase(loginUser.rejected , (state , action) => {
@@ -81,7 +89,7 @@ export const authSlice = createSlice({
 
 
 
-export const { logout , clearError } = authSlice.actions
+export const { logout , clearError , resetStatus } = authSlice.actions
 
 export default authSlice.reducer
 

@@ -3,11 +3,13 @@ import { Button, Container, TextField } from '@mui/material'
 
 import '../styles/auth.css';
 import { Link  , useNavigate} from "react-router-dom";
-import { useState } from "react";
+import { useState , useEffect } from "react";
 
 import {useDispatch , useSelector } from 'react-redux'
 
 import { registerUser } from "../features/auth/AuthServices";
+import { resetStatus } from "../features/auth/AuthSlice";
+import { ValidateForm } from "../app/Validate";
 
 export default function Register () {
 
@@ -27,94 +29,41 @@ export default function Register () {
 
 
     const loading = useSelector(state => state.auth.isLoading);
+    const errors = useSelector(state => state.auth.errors);
+    const status = useSelector(state => state.auth.status);
 
 
     
     const dispatch = useDispatch();
-    
-    const validateForm = () => {
-        let valid = true;
-
-        if (!details.name.trim()) {
-            setError('Name Is Required');
-            valid = false;
-            return valid;
-    } else if (details.name.length < 3) {
-            setError('Name Must be At Least 3 letters');
-            valid = false;
-            return valid;
-    }
-
-        if (!details.username.trim()) {
-            setError('Username Is Required');
-            valid = false;
-            return valid;
-    } else if (details.username.length < 3) {
-            setError('Username Must be At Least 3 letters');
-            valid = false;
-             return valid;
-    }
-
-        if (!details.email.trim()) {
-            setError('Email Is Required');
-            valid = false;
-             return valid;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(details.email)) {
-            setError('Invalid Email');
-            valid = false;
-            return valid;
-    }
-
-        if (!details.password) {
-            setError('Password is Required');
-            valid = false;
-            return valid;
-    } else if (details.password.length < 8) {
-            setError('Password Must Be At Least 8 letters');
-            valid = false;
-        return valid;
-
-    } else if (!/(?=.*[A-Za-z])(?=.*\d)/.test(details.password)) {
-            setError('Password Must Contain letters And Numbers');
-            valid = false;
-        return valid;
-    }
-
-    return true
-
-
-        
-    };
-
-
-
 
     const handleRegisterUser =  async (event) => {
 
         event.preventDefault();
 
 
-        if (validateForm() && !loading){
+        if (ValidateForm(setError , details) && !loading){
 
-            const attemp =  await dispatch(registerUser(details)) // Register User
-            
-            if (attemp.payload.error){
-     
-                setError(() => Object.values(attemp.payload.errors)[0]);
+            dispatch(registerUser(details)).unwrap() // Register User
 
-                return;
-            } 
-            
-            if (attemp.payload.statusCode == 201){
-                go('/auth/login')
-            }
+
 
         }
 
-
-
-
     }
+
+    useEffect(() => {
+        if (errors){
+            setError(Object.values(errors)[0]);
+        }else{
+            
+            if (status === 200){
+                dispatch(resetStatus());
+                go('/auth/login')
+            }
+        }
+
+    }, [errors , status])
+
 
 
 

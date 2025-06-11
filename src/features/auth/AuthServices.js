@@ -7,20 +7,23 @@ import { createAsyncThunk} from '@reduxjs/toolkit'
 
 
 export const registerUser = createAsyncThunk(
-    'auth/register',
-    async (data, { rejectWithValue}) => {
+  'auth/register',
+  async (data, { rejectWithValue }) => {
       try {
-        const response = await axios.post(utils.join('auth' , 'register') , data , {headers : {}} );
-        return response.data;
+          const response = await axios.post(utils.join('auth', 'register'), data, { headers: {} });
+          return response.data;
       } catch (error) {
-        return rejectWithValue({
-            error : true,
-            errors: error.response?.data?.data?.errors || error.message 
-        });
-      }
-    }
-  );
 
+        const errorData = {
+              error: true,
+              errors: error.response?.data?.data?.errors || 
+                      error.response?.data?.message || 
+                      error.message
+          };
+          return rejectWithValue(errorData);
+      }
+  }
+);
 
 
 
