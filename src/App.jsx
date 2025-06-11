@@ -17,6 +17,8 @@ import { useEffect } from 'react';
 import Login from './components/Login';
 import Register from './components/Register';
 
+import { UserProvider } from './contexts/User';
+
 
 function App() {
 
@@ -26,41 +28,48 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-        dispatch(setLoading(false))
+       
+    dispatch(setLoading(false))
 
   } , [])
 
 
+
+
   return  (
-    <ThemeProvider theme={getModeTheme(mode)}>
-      <CssBaseline>
-              <Routes>
+    <UserProvider>
 
-                <Route path="/" element={<MainLayout/>}>
-                    <Route index element={<HomePage/>} />
-                </Route>
+        <ThemeProvider theme={getModeTheme(mode)}>
+          <CssBaseline>
+                  <Routes>
 
-                <Route path="/auth" >
-                    <Route path="login" element={<Login/>} />
-                    <Route path="register" element={<Register/>} />
-                </Route>
+                    <Route path="/" element={<MainLayout/>}>
+                        <Route index element={<HomePage/>} />
+                    </Route>
 
-                <Route path="/feed" element={<MainLayout/>}>
-                    <Route path="subscriptions" element={<Subscriptions/>} />
-                    <Route path="shorts" element={<ShortsPage/>} />
-                    <Route path='explore' element={<Explore/>} />
-                    <Route path='history' element={<History/>} />
-                </Route>
+                    <Route path="/auth" >
+                        <Route path="login" element={<Login/>} />
+                        <Route path="register" element={<Register/>} />
+                    </Route>
+
+                    <Route path="/feed" element={<MainLayout/>}>
+                        <Route path="subscriptions" element={<Subscriptions/>} />
+                        <Route path="shorts" element={<ShortsPage/>} />
+                        <Route path='explore' element={<Explore/>} />
+                        <Route path='history' element={<History/>} />
+                    </Route>
+                      
+                      {/* Replace Later With Dynamic Route */}
+
+                    <Route path="/channel" element={<MainLayout/>}>
+                        <Route path="AHMED1CB" element={<Channel/>} />
+                    </Route>
                   
-                  {/* Replace Later With Dynamic Route */}
+                  </Routes>
+          </CssBaseline>
+      </ThemeProvider>
+  </UserProvider>
 
-                <Route path="/channel" element={<MainLayout/>}>
-                    <Route path="AHMED1CB" element={<Channel/>} />
-                </Route>
-              
-              </Routes>
-      </CssBaseline>
-  </ThemeProvider>
    
   )
 }
