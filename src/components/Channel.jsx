@@ -1,32 +1,40 @@
 import { Container } from '@mui/material';
 import  { useState } from 'react';
+import { useUser } from '../contexts/User';
 import '../styles/Channel.css'; 
 import Videos from './Videos';
-const ChannelPage = () => {
+const Channel = ({profile}) => {
   const [activeTab, setActiveTab] = useState('home');
 
+  let user = useUser();
 
-  return (
+
+
+
+  return   (
       <main className="channel-page">
         <Container>
 
             <div className="channel-header">
             <div className="channel-info">
                 <div className="channel-avatar">
-                <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="channel" />
+                <img src={user.profile_photo ? user.profile_photo : '/user.png' } alt="channel" />
                 </div>
                 <div className="channel-details">
-                <h1>Ahmed Hassan</h1>
+                <h1>{user.name}</h1>
                 <div className="channel-stats">
-                    <span>@AHMED1cb</span>
-                    <span>1.2M subscribers</span>
-                    <span>120 videos</span>
+                    <span>@{user.username}</span>
+                    <span>{user.subscribers_count} subscribers</span>
+                    <span>{user.videos_count} videos</span>
                 </div>
                 </div>
             </div>
-            <button className={`subscribe-button`}>
-                SUBSCRIBE
-            </button>
+            {
+                !profile && 
+                <button className={`subscribe-button`}>
+                    SUBSCRIBE
+                </button>
+            }
             </div>
 
             <div className="channel-tabs">
@@ -44,24 +52,15 @@ const ChannelPage = () => {
             >
                 Videos
             </button>
+            
             <button 
-                className={`channel-tab ${activeTab === 'playlists' ? 'active' : ''}`}
-                onClick={() => setActiveTab('playlists')}
+                className={`channel-tab ${activeTab === 'shorts' ? 'active' : ''}`}
+                onClick={() => setActiveTab('shorts')}
             >
-                Playlists
+                Shorts
             </button>
-            <button 
-                className={`channel-tab ${activeTab === 'community' ? 'active' : ''}`}
-                onClick={() => setActiveTab('community')}
-            >
-                Community
-            </button>
-            <button 
-                className={`channel-tab ${activeTab === 'channels' ? 'active' : ''}`}
-                onClick={() => setActiveTab('channels')}
-            >
-                Channels
-            </button>
+            
+
             <button 
                 className={`channel-tab ${activeTab === 'about' ? 'active' : ''}`}
                 onClick={() => setActiveTab('about')}
@@ -70,11 +69,15 @@ const ChannelPage = () => {
             </button>
             </div>
 
-            <Videos/>
+            {user.count_videos > 0 && 
+                <Videos/> || 
+                
+                <h2>No Videos Yet</h2>
+            }
         </Container>
       
       </main>
   );
 };
 
-export default ChannelPage;
+export default Channel;

@@ -43,6 +43,8 @@ function App() {
 
                     <Route path="/" element={<MainLayout/>}>
                         <Route index element={<HomePage/>} />
+                        <Route path="profile"  element={<Channel profile/>} />
+
                     </Route>
 
                     <Route path="/auth" >
@@ -62,6 +64,7 @@ function App() {
                     <Route path="/channel" element={<MainLayout/>}>
                         <Route path="AHMED1CB" element={<Channel/>} />
                     </Route>
+
                   
                   </Routes>
           </CssBaseline>

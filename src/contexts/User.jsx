@@ -34,7 +34,7 @@ export const UserProvider = ({children}) => {
     
 
 
-    return user &&  <UserContext.Provider value={{}}>
+    return user &&  <UserContext.Provider value={user}>
             {children}
     </UserContext.Provider> || <Loading/>
 }

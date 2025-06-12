@@ -41,6 +41,7 @@ const userSlice = createSlice({
             state.isLoading = false;
             state.errors = action.payload.errors;
             localStorage.removeItem('token');
+            location.href= '/auth/login'
         }) 
 
         builder.addCase(loadUser.fulfilled , (state , action) => {

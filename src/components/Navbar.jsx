@@ -22,7 +22,7 @@ export default () => {
             {icon: 'users' ,         path: '/feed/subscriptions',text : 'Subscriptions'  },
             {icon: 'monitor-play'  , path: '/feed/shorts' ,      text : 'Shorts'  },
             {icon: 'clock-counter-clockwise'   ,            path: '/feed/history' , text : 'History'  },
-            {icon: 'user-circle' ,   path:'/channel/AHMED1CB' ,         text : 'Profile'  },
+            {icon: 'user-circle' ,   path:'/profile' ,         text : 'Profile'  },
     ]
 
 
