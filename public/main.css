@@ -56,6 +56,10 @@ a{
 .heading{
     color:var(--info);
     width:fit-content;
+    height:calc(100vh - 62px);
     margin: auto;
-    
+    text-transform: capitalize;
+    display:grid;
+    place-items:center
+
 }
