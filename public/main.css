@@ -53,3 +53,9 @@ a{
 }
 
 
+.heading{
+    color:var(--info);
+    width:fit-content;
+    margin: auto;
+    
+}
