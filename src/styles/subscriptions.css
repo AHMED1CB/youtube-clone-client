@@ -26,7 +26,16 @@
     border-radius: 8px;
     cursor: pointer;
     transition:.3s;
+    width:45%;
+    justify-content: center;
 }
+
+.subscriptions-header .channels > div img{
+    width:40px;
+    height:40px;
+    margin:auto;
+}
+
 
 .subscriptions-header .channels > div.active , .channels > div:hover {
     background-color: var(--activeBg);

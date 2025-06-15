@@ -5,7 +5,7 @@ import { getModeTheme } from './app/Theme';
 import { useSelector , useDispatch} from 'react-redux'
 
 import HomePage from './components/HomePage';
-import Explore from './components/Explore';
+import Upload from './components/Upload';
 import MainLayout from './layouts/MainLayout';
 import Subscriptions from './components/Subscriptions';
 import ShortsPage from './components/ShortVideos';
@@ -55,9 +55,14 @@ function App() {
                     <Route path="/feed" element={<MainLayout/>}>
                         <Route path="subscriptions" element={<Subscriptions/>} />
                         <Route path="shorts" element={<ShortsPage/>} />
-                        <Route path='explore' element={<Explore/>} />
                         <Route path='history' element={<History/>} />
                     </Route>
+
+                    <Route path="/upload" element={<MainLayout/>}>
+                        <Route index element={<Upload/>}/>
+                    </Route>
+
+
                       
                       {/* Replace Later With Dynamic Route */}
 

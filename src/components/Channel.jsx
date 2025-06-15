@@ -72,7 +72,7 @@ const Channel = ({profile}) => {
             {user.count_videos > 0 && 
                 <Videos/> || 
                 
-                <h2>No Videos Yet</h2>
+                <h2 className="heading">No Videos Yet</h2>
             }
         </Container>
       
