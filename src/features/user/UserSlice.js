@@ -17,7 +17,43 @@ export const loadUser = createAsyncThunk(
         return rejectWithValue(error.response.data);
       }
     }
-  );
+);
+
+
+export const changeHistoryState = createAsyncThunk(
+  'user/state/change',
+  async (_ ,{ rejectWithValue }) => {
+    try {
+      const response = await axios.post(utils.join('history' , 'changestate') , {} , {
+          headers: {
+              Authorization: `Bearer ${localStorage.token}`
+          }
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+  
+
+
+export const clearHistoryVideos = createAsyncThunk(
+  'user/history/clear',
+  async (_ ,{ rejectWithValue }) => {
+    try {
+      const response = await axios.post(utils.join('history' , 'clear') , {} , {
+          headers: {
+              Authorization: `Bearer ${localStorage.token}`
+          }
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+  
 
 
 
@@ -51,6 +87,49 @@ const userSlice = createSlice({
 
             state.status = 200;
         }) 
+
+
+        // changeState
+
+
+        builder.addCase(changeHistoryState.pending , (state) => {
+          state.isLoading = true;
+          state.errors = null
+      }) 
+
+      builder.addCase(changeHistoryState.rejected , (state , action) => {
+          state.isLoading = false;
+          state.errors = action.payload.errors;
+      }) 
+
+      builder.addCase(changeHistoryState.fulfilled , (state , action) => {
+          state.errors = null;
+          state.user.historyState = action.payload.data.currentState;
+          state.isLoading = false;
+        }) 
+        
+        // clear
+
+
+      builder.addCase(clearHistoryVideos.pending , (state) => {
+          state.isLoading = true;
+          state.errors = null
+      }) 
+
+      builder.addCase(clearHistoryVideos.rejected , (state , action) => {
+          state.isLoading = false;
+          state.errors = action.payload.errors;
+      }) 
+
+      builder.addCase(clearHistoryVideos.fulfilled , (state , action) => {
+          state.errors = null;
+          state.user.history = [];
+          state.isLoading = false;
+        }) 
+        
+
+
+
     }
 
 })

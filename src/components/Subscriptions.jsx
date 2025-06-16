@@ -1,14 +1,20 @@
 import  '../styles/subscriptions.css'
-import SubscriptionsHeader from './SubscriptionsHeader'
-import Videos from './Videos'
+import SubscribedChannels from './SubscribedChannels'
+import { useUser } from "../contexts/User"
+
 
 export default () => {
+    
+    const user = useUser();
+        
     return (
         <main className="subscriptions-page">
 
-                <SubscriptionsHeader/>
+            <h2 className="heading">{user.subscriptions.length > 0 ? 'Subscribed Channels' : 'No Channels'}</h2>
 
-                <Videos/>
+                {user.subscriptions.length  > 0 &&
+                    <SubscribedChannels/>
+                 }
 
         </main>
     )
