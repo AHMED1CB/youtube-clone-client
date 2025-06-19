@@ -15,10 +15,12 @@ export default () => {
 
     useEffect(() =>{
 
-        dispatch(getVideos())
+        if (!isLoading && !videos){
+            dispatch(getVideos())
+        }
 
 
-    } , [])
+    } , [isLoading])
 
 
 
@@ -28,7 +30,7 @@ export default () => {
         <>
              <main className="home-page">
                     <Container className="homepage-content">
-                        <Videos/>
+                        <Videos videos={videos}/>
                     </Container>
              </main>
         </>

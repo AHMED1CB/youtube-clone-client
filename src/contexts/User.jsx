@@ -13,6 +13,7 @@ export const UserProvider = ({children}) => {
     const go = useNavigate();
     const dispatch = useDispatch(); 
     const user = useSelector(state => state.user.user);
+    const status = useSelector(state => state.user.status);
     
     useEffect(() => {
         if (!user){
@@ -32,6 +33,12 @@ export const UserProvider = ({children}) => {
         }
     }  , [user])
     
+
+    useEffect(() => {
+        if (status == 500){
+            go('/auth/login')
+        }
+    }, [status])
 
 
     return user &&  <UserContext.Provider value={user}>

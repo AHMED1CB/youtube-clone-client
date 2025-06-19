@@ -1,0 +1,17 @@
+
+.upload-page{
+    padding:12px;
+    overflow: auto;
+    width:100%;
+    height:calc(100% - 62px )
+
+}
+
+.upload-contnet{
+    width: 100%;
+    height:fit-content;
+    overflow: hidden;
+    display:flex;
+    flex-direction: column;
+    justify-self: space-between;
+}

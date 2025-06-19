@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { utils } from '../../app/utils';
-
+import { utils } from "../../app/utils";
 
 export const loadUser = createAsyncThunk(
     'user/get',
@@ -14,7 +13,7 @@ export const loadUser = createAsyncThunk(
         });
         return response.data;
       } catch (error) {
-        return rejectWithValue(error.response.data);
+        return rejectWithValue(error);
       }
     }
 );
@@ -75,10 +74,16 @@ const userSlice = createSlice({
 
         builder.addCase(loadUser.rejected , (state , action) => {
             state.isLoading = false;
-            state.errors = action.payload.errors;
-            localStorage.removeItem('token');
-            location.href= '/auth/login'
-        }) 
+            state.errors = action.payload?.response?.data || 'Internal Server Error';
+            
+            if (action.payload.request.status !== 0){
+              localStorage.removeItem('token');
+              state.status = 500;              
+            }else{
+              alert('Server Error Please Try Again Later')
+            }
+        
+          }) 
 
         builder.addCase(loadUser.fulfilled , (state , action) => {
             state.isLoading = false;

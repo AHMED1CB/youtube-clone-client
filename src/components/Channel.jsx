@@ -6,9 +6,7 @@ import Videos from './Videos';
 const Channel = ({profile}) => {
   const [activeTab, setActiveTab] = useState('home');
 
-  let user = useUser();
-
-
+  let user = useUser(); // Only In Profile
 
 
   return   (
@@ -69,8 +67,8 @@ const Channel = ({profile}) => {
             </button>
             </div>
 
-            {user.count_videos > 0 && 
-                <Videos/> || 
+            {user.videos_count > 0 && 
+                <Videos videos={user.videos}/> || 
                 
                 <h2 className="heading">No Videos Yet</h2>
             }
