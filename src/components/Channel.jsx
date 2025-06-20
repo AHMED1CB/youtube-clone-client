@@ -37,14 +37,6 @@ const Channel = ({profile}) => {
 
             <div className="channel-tabs">
             <button 
-                className={`channel-tab ${activeTab === 'home' ? 'active' : ''}`}
-                
-                onClick={() => setActiveTab('home')}
-                
-                >
-                Home
-            </button>
-            <button 
                 className={`channel-tab ${activeTab === 'videos' ? 'active' : ''}`}
                 onClick={() => setActiveTab('videos')}
             >

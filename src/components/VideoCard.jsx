@@ -54,7 +54,7 @@ export default ({data}) => {
                     </Typography>
 
                     <Typography variant="body2" color="text.secondary" className="video-details">
-                            {data.views?.length || 0} views • 2 days Ago { /* Changing Date Later*/ }
+                            {data.views?.length || 0} views • {data.creation_date} { /* Changing Date Later*/ }
                     </Typography>
                 </FlexBox>    
 

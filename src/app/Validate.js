@@ -47,4 +47,24 @@
 
 
         
-    };
+};
+
+
+export const  validateUploadVideo = (data) => {
+
+    let isValid = false;
+    if (data.video && data.video.type.startsWith('video') && data.title?.trim() && data.descreption?.trim() ){
+    
+        isValid = true;
+    
+        if (data.cover && !data.cover.startsWith('image')){
+            isValid = false;
+        }
+    }else{
+        isValid = false;
+    }
+    return isValid;
+
+
+
+}

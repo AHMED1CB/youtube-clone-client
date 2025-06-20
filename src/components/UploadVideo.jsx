@@ -13,6 +13,7 @@ import { useState , useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { reset, uploadVideo } from '../features/videos/VideosSlice';
 import { useNavigate } from 'react-router-dom'
+import { validateUploadVideo } from '../app/Validate';
 
 const HiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -35,7 +36,6 @@ const HiddenInput = styled('input')({
 
 --------------------------------*/
 
-
 const UploadVideo = () => {
  
     const [data , setData] = useState({
@@ -56,18 +56,25 @@ const UploadVideo = () => {
 
     const handleVideoUpload = (event) => {
         event.preventDefault();
-        
-        const fullData = new FormData();
 
-        Object.keys(data).map(key => {
-            if (data[key]){
-                fullData.append(key , data[key]);
-            }
-        })
 
-    
-        dispatch(uploadVideo(fullData));
+        if (validateUploadVideo(data)){
 
+                
+                const fullData = new FormData();
+
+            Object.keys(data).map(key => {
+                if (data[key]){
+                    fullData.append(key , data[key]);
+                }
+            })
+
+            
+            dispatch(uploadVideo(fullData));
+            
+        }else{
+            alert('Invalid Video Data') // Will Replace With Modal Soon
+        }
     }
 
 
@@ -82,7 +89,8 @@ const UploadVideo = () => {
             }
         }
 
-    } , [isLoading , isUploaded])
+    } , [isLoading])
+
 
 
   return (
@@ -98,7 +106,7 @@ const UploadVideo = () => {
                     variant="outlined"
                     startIcon={<Icon icon="cloud"/>}
                     fullWidth
-                    sx={{ py: 2 }}
+                    sx={{ py: 2 , color: (data.video ? data.video.type.startsWith('video') ? '' : 'red' : '')}}
                     >
                     {data.video ? data.video.name : 'Select Video File'}
                     <HiddenInput 
@@ -139,7 +147,7 @@ const UploadVideo = () => {
                     startIcon={<Icon icon="cloud" />}
                     onChange={() => setData({...data , cover: event.target.files[0]})}
                     fullWidth
-                    sx={{ py: 2 }}
+                    sx={{ py: 2, color: (data.cover ? data.cover.type.startsWith('image') ? '' : 'red' : '') }}
                     >
                     {data.cover ? data.cover.name : 'Select Thumbnail'}
                     <HiddenInput 
