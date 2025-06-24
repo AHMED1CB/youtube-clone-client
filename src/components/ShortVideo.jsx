@@ -1,75 +1,131 @@
-import { Avatar, Button } from "@mui/material"
-import FlexBox from "./mui/FlexBox"
-import Icon from "./Icon"
+import { Avatar, Button } from "@mui/material";
+import Icon from "./Icon";
+import { utils } from "../app/utils";
+import { useEffect, useRef, useState } from "react";
+import '../styles/Shorts.css'
 
-export default () => {
+export default ({ data }) => {
+    const videoRef = useRef(null);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [progress, setProgress] = useState(0);
+
+    // Auto Play
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        videoRef.current.play();
+                    } else {
+                        videoRef.current.pause();
+                    }
+                });
+            },
+            { threshold: 0.7 }
+        );
+    
+        if (videoRef.current) {
+            observer.observe(videoRef.current);
+        }
+    
+        return () => observer.disconnect();
+    }, []);
+
+
+    // Change Progress 
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        const updateProgress = () => {
+            setProgress((video.currentTime / video.duration) * 100);
+        };
+
+        video.addEventListener('timeupdate', updateProgress);
+        video.addEventListener('play', () => setIsPlaying(true));
+        video.addEventListener('pause', () => setIsPlaying(false));
+
+        return () => {
+            video.removeEventListener('timeupdate', updateProgress);
+            video.removeEventListener('play', () => setIsPlaying(true));
+            video.removeEventListener('pause', () => setIsPlaying(false));
+        };
+    }, []);
+
+    const togglePlay = () => {
+        if (videoRef.current.paused) {
+            videoRef.current.play();
+        } else {
+            videoRef.current.pause();
+        }
+    };
+
     return (
-        <div className="short-video">
-                <div className="video-shape">
-
+        <div className="shorts-container">
+            <div className="shorts-player-container" onClick={togglePlay}>
+                <video
+                    ref={videoRef}
+                    className="shorts-player"
+                    loop
+                    src={utils.videosStorage + data.video}
+                    poster={utils.storage + data.cover}
+                />
                 
-                            <div className="video">
-                                {/* We Just Using Images For This Time */}
-                                <div className="video-content">
-                                    <img src="https://picsum.photos/600/400" alt="video" />
-                                </div>
-                                
-
-                                <div className="video-actions">
-                                    
-                                    <div className="action action-like">
-                                        <Icon icon={'thumbs-up'}/>
-                                        <span className="likes-count">200k</span>
-                                    </div>
-                                    
-                                    <div className="action action-dislike">
-                                        <Icon icon={'thumbs-down'}/>
-                                        <span className="dislikes-count">5k</span>
-                                    </div>
-
-                                    <div className="action action-comment">
-                                        <Icon icon={'chat'}/>
-                                        <span className="comments-count">50k</span>
-                                    </div>
-                                    
-                                    <div className="action action-share">
-                                        <Icon icon={'share'}/>
-                                        <span className="shares-count">8k</span>
-                                    </div>
-                                
-                                                                
-                                    <div className="action action-details">
-                                        <Icon icon={'dots-three-outline'}/>
-                                    </div>
-
-                            </div>
-
-
-                            </div>
-
-                            <FlexBox className="details" center={false}>
-
-
-                                <FlexBox className="video-details" center={false}>
-                                    <p className="video-title">Lorem ipsum dolor sit amet consectetur </p>
-                                    <span className="count-views">200k views</span>
-                                </FlexBox>
-
-                                <FlexBox className="channel-details" >
-
-                                    <div className="content">
-                                        <Avatar src={'https://picsum.photos/50/50'} className="channel-avatar" alt="dev 1"/>
-                                        <span className="channel-name">Dev 1</span>
-                                    </div>
-
-                                    <div className="actions">
-                                        <Button className="subscribe-btn">subscribe</Button>
-                                    </div>
-
-                                </FlexBox>
-
-                            </FlexBox>
-                        </div>
+                {!isPlaying && (
+                    <div className="shorts-play-button">
+                        <Icon icon="play" size={24} />
                     </div>
-    ) 
-}
+                )}
+            </div>
+
+            <div className="shorts-progress-container">
+                <div className="shorts-progress-bar" style={{ width: `${progress}%` }} />
+            </div>
+
+            <div className="shorts-side-controls">
+                <div className="shorts-control">
+                    <Icon icon="thumbs-up" size={24} />
+                    <span className="shorts-control-count">{data.reactions_count}</span>
+                </div>
+                
+                <div className="shorts-control">
+                    <Icon icon="thumbs-down" size={24} />
+                </div>
+                
+                <div className="shorts-control">
+                    <Icon icon="chat" size={24} />
+                    <span className="shorts-control-count">{data.comments_count}</span>
+                </div>
+                
+                <div className="shorts-control">
+                    <Icon icon="share" size={24} />
+                </div>
+                
+                <div className="shorts-control">
+                    <Icon icon="dots-three-outline" size={24} />
+                </div>
+            </div>
+
+            <div className="shorts-bottom-info">
+                <div className="shorts-channel-info">
+                    <Avatar 
+                        src={data.channel.profile_photo ?? '/user.png'} 
+                        className="shorts-channel-avatar" 
+                    />
+                    <span className="shorts-channel-name">{data.channel.name}</span>
+                    <Button 
+                        variant="contained" 
+                        size="small" 
+                        className="shorts-subscribe-btn"
+                    >   
+                        Subscribe
+                    </Button>
+                </div>
+                
+                <p className="shorts-title">{data.title}</p>
+                <p className="shorts-views">{data.views_count} views</p>
+            </div>
+        </div>
+    );
+};

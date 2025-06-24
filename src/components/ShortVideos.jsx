@@ -21,9 +21,11 @@ export default () => {
         dispatch(getShorts())
 
 
+
     } , [])
 
     
+    const shortVideos = shorts?.map(short => <ShortVideo key={short.id} data={short}/>) || null;
 
     return (
         <main className="shortVideos-page">
@@ -31,12 +33,7 @@ export default () => {
                     {
                         shorts?.length > 0 &&  
                         (
-                            <FlexBox className="shorts">
-                                <ShortVideo/>
-                                <ShortVideo/>
-                                <ShortVideo/>
-                                <ShortVideo/>
-                            </FlexBox> 
+                                shortVideos
                         ) || (isLoading && <h2 className="heading">Loading Shorts</h2>) || (
                             shorts?.length == 0 && <h2 className="heading">no Short Videos On App</h2>
                         )

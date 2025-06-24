@@ -10,6 +10,7 @@ import MainLayout from './layouts/MainLayout';
 import Subscriptions from './components/Subscriptions';
 import ShortsPage from './components/ShortVideos';
 import UploadVideo from './components/UploadVideo';
+import UploadShort from './components/UploadShort';
 import History from './components/History';
 import Channel from './components/Channel';
 
@@ -62,6 +63,7 @@ function App() {
                     <Route path="/upload" element={<MainLayout/>}>
                         <Route index element={<Upload/>}/>
                         <Route path="video" element={<UploadVideo/>}  />
+                        <Route path="short" element={<UploadShort/>}  />
 
                     </Route>
 

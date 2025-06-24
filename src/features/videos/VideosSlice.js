@@ -49,6 +49,25 @@ export const uploadVideo = createAsyncThunk('videos/upload' , async (data , {rej
 
 
 
+export const uploadShort = createAsyncThunk('shorts/upload' , async (data , {rejectWithValue}) => {
+
+    try{
+        const response = await axios.post(utils.join('shorts' , 'upload') , data ,  {
+            headers:{
+                Authorization: `Bearer ${localStorage.token}`
+            },
+            
+        });
+    
+        return response.data;
+    }catch(error){
+        return rejectWithValue(error)
+    }
+
+});
+
+
+
 const VideosSlice = createSlice({
     name: 'video',
     initialState: {
@@ -109,13 +128,30 @@ const VideosSlice = createSlice({
         builder.addCase(uploadVideo.rejected , (state , action) => {
             state.isLoading = false;
             state.errors = action.payload?.response?.data?.data?.errors || {server: 'Internal Server Error'};
-            console.log(action.payload.response.data)
         }) 
 
         builder.addCase(uploadVideo.fulfilled , (state , action) => {
             state.isLoading = false;
             state.isUploaded = true;
         }) 
+
+        // Uploading Shorts
+
+        builder.addCase(uploadShort.pending , (state) => {
+            state.isLoading = true;
+        }) 
+
+        builder.addCase(uploadShort.rejected , (state , action) => {
+            state.isLoading = false;
+            state.errors = action.payload?.response?.data?.data?.errors || {server: 'Internal Server Error'};
+        }) 
+
+        builder.addCase(uploadShort.fulfilled , (state , action) => {
+            state.isLoading = false;
+            state.isUploaded = true;
+        }) 
+
+
     }
 
 })

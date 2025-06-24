@@ -9,6 +9,7 @@
     --activeNavLinkText:#121212;
     --actionBg:rgba(255, 255, 255, 0.1);
     --subscribe:#dd4e4e;
+    --progress: var(--subscribe);
 
 }
 
@@ -19,10 +20,6 @@
     box-sizing:border-box;
 }
 
-
-html{
-    scroll-behavior: smooth;
-}
 body , #root{
     width: 100vw;
     height: fit-content;
