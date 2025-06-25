@@ -54,8 +54,6 @@ export const clearHistoryVideos = createAsyncThunk(
 );
   
 
-
-
 const userSlice = createSlice({
     name: 'user',
     initialState: {
@@ -131,6 +129,9 @@ const userSlice = createSlice({
           state.user.history = [];
           state.isLoading = false;
         }) 
+
+
+      
         
 
 

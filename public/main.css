@@ -22,7 +22,7 @@
 
 body , #root{
     width: 100vw;
-    height: fit-content;
+    height: 100vh;
     font-family: 'roboto' , Arial, Helvetica, sans-serif;
     overflow-x: hidden;
 }

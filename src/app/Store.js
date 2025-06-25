@@ -3,6 +3,7 @@ import  displayReducer  from '../features/Display/DisplaySlice'
 import  authReducer  from '../features/auth/AuthSlice'
 import  userReducer  from '../features/user/UserSlice'
 import videosReducer from '../features/videos/VideosSlice'
+import channelReducer from '../features/channel/channelSlice'
 
 
 export const store = configureStore({
@@ -10,6 +11,8 @@ export const store = configureStore({
         display: displayReducer,
         auth : authReducer,
         user : userReducer,
-        videos: videosReducer 
+        videos: videosReducer,
+        channel: channelReducer
+
     }
 })

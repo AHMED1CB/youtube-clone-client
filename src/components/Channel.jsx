@@ -1,16 +1,57 @@
 import { Container } from '@mui/material';
-import  { useState } from 'react';
+import  { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useUser } from '../contexts/User';
+import { loadChannel } from '../features/channel/channelSlice';
 import '../styles/Channel.css'; 
+import Loading from './Loading';
+
 import Videos from './Videos';
 const Channel = ({profile}) => {
-  const [activeTab, setActiveTab] = useState('home');
 
-  let user = useUser(); // Only In Profile
+    const dispatch = useDispatch();
+    const go = useNavigate();
+    const channel =  useSelector(state => state.channel.channel);
+    const isLoading =  useSelector(state => state.channel.isLoading);
+    
+    const [activeTab, setActiveTab] = useState('home');
+
+    const profileUser = useUser();
+
+    const [user , setUser] = useState(null);
+    
+    const {channelUsername} = useParams();   
+
+    if (!profile && (profileUser.username == channelUsername)){
+        go('/profile')
+    }
 
 
-  return   (
-      <main className="channel-page">
+
+   useEffect(() => {
+
+    if (profile){
+        setUser(profileUser);
+    }else{
+        // get User By Slug
+        if (channel){
+
+            setUser(channel)
+        }else{
+            dispatch(loadChannel(channelUsername));
+        }
+
+
+    }
+
+   }, [channel])
+
+
+
+
+  return user && !isLoading && ( 
+        <main className="channel-page">
         <Container>
 
             <div className="channel-header">
@@ -67,7 +108,7 @@ const Channel = ({profile}) => {
         </Container>
       
       </main>
-  );
+  ) || (isLoading && <Loading/>) || <h2 className="heading">User Not Found</h2>
 };
 
 export default Channel;
