@@ -5,6 +5,7 @@ import {
   Typography,
   Avatar,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { utils } from "../app/utils";
 
 import FlexBox from './mui/FlexBox';
@@ -12,6 +13,9 @@ import FlexBox from './mui/FlexBox';
 export default ({data}) => {
 
     const profileImg =  data.channel.profile_photo ? utils.storage + data.channel.profile_photo : '/user.png'; 
+    
+    const go = useNavigate();
+    
 
     return (
       
@@ -30,7 +34,7 @@ export default ({data}) => {
 
              <CardContent className="card-video-content">
                 <FlexBox className="video-details"  >
-                        <Avatar src={profileImg} alt={data.channel.username} className="avatar-image" />
+                        <Avatar onClick={() =>   go(data.channel.username ? 'channel/' + data.channel.username : null)} src={profileImg} alt={data.channel.username} className="avatar-image" />
                         <Typography
                                 variant="title"
                                 fontWeight="bold"
@@ -49,7 +53,7 @@ export default ({data}) => {
                 </FlexBox>
                 
                 <FlexBox className="video-footer-details" center={false} styles={{gap:'7px'}}>
-                    <Typography variant="body2" className="channelName">
+                    <Typography onClick={() => go('channel/' +data.channel.username)} variant="body2" className="channelName">
                                 {data.channel.name}
                     </Typography>
 

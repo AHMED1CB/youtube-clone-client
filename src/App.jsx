@@ -13,6 +13,7 @@ import UploadVideo from './components/UploadVideo';
 import UploadShort from './components/UploadShort';
 import History from './components/History';
 import Channel from './components/Channel';
+import Profile from './components/Profile';
 
 import {setLoading} from './features/Display/DisplaySlice';
 import { useEffect } from 'react';
@@ -45,7 +46,7 @@ function App() {
 
                     <Route path="/" element={<MainLayout/>}>
                         <Route index element={<HomePage/>} />
-                        <Route path="profile"  element={<Channel profile/>} />
+                        <Route path="profile"  element={<Profile/>  } />
                     </Route>
 
                     <Route path="/auth" >

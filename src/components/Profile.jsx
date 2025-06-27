@@ -1,53 +1,20 @@
 import { Container } from '@mui/material';
-import  { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {useNavigate, useParams } from 'react-router-dom';
 import { useUser } from '../contexts/User';
-import { loadChannel } from '../features/channel/channelSlice';
 import '../styles/Channel.css'; 
-import Loading from './Loading';
+
+import { useState } from 'react' 
+import Videos from './Videos';
 import ChannelShorts from './ChannelShorts';
 
-import Videos from './Videos';
-const Channel = () => {
+const Profile = () => {
 
-    const dispatch = useDispatch();
-
-    const go = useNavigate();
-
-    const channel =  useSelector(state => state.channel.channel);
-
-    const isLoading =  useSelector(state => state.channel.isLoading);
     
     const [activeTab, setActiveTab] = useState('videos');
 
-    const profileUser = useUser();
-
-    const [user , setUser] = useState(null);
-    
-    let {channelUsername} = useParams();   
-
-   useEffect(() => {
-
-        if (channelUsername == profileUser.username){
-            go('/profile')
-        }
-
-        // get User By Username
-        if (channel){
-            setUser(channel)
-        }else{
-            dispatch(loadChannel(channelUsername));
-        }
+    const user = useUser();
 
 
-
-   }, [channel])
-
-
-
-
-  return user && !isLoading && ( 
+  return  ( 
         <main className="channel-page">
         <Container>
 
@@ -65,11 +32,6 @@ const Channel = () => {
                 </div>
                 </div>
             </div>
-            {
-                <button className={`subscribe-button`}>
-                    SUBSCRIBE
-                </button>
-            }
             </div>
 
             <div className="channel-tabs">
@@ -95,6 +57,7 @@ const Channel = () => {
                 About
             </button>
             </div>
+
             {activeTab == 'videos' ? (user.videos.length > 0 && 
                 <Videos videos={user.videos}/> || <h2 className="heading">No Videos Yet</h2>
             ) : (
@@ -112,7 +75,7 @@ const Channel = () => {
         </Container>
       
       </main>
-  ) || (isLoading && <Loading/>) || (!isLoading && !user &&  <h2 className="heading">User Not Found</h2>)
+  )
 };
 
-export default Channel;
+export default Profile;

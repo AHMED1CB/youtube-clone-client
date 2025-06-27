@@ -1,0 +1,33 @@
+.channel-shorts{
+    width:100%;
+    display:grid;
+    grid-template-columns: repeat(auto-fill , minmax(280px , 1fr));
+    grid-template-rows: repeat(auto-fill , minmax(280px , 1fr));
+    gap:20px;
+    overflow: auto;
+
+}
+
+
+.channel-shorts > div  .cover , .channel-shorts > div img{
+    width: 100%;
+    height:100%;
+    object-fit: cover;
+}
+
+.channel-shorts > div{
+    border-radius: 8px;
+    position: relative;
+    cursor: pointer;
+}
+
+.channel-shorts > div .details{
+    position: absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    padding:12px;
+    font-size: 16px;
+    font-weight: 700;
+    color:var(--info);
+}

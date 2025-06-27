@@ -1,7 +1,7 @@
 :root{
     --text:#fff;
     --bg:#121212;
-    --info:#ddd;
+    --info:#f1f1f1;
     --activeBg:#fff;
     --activeText:#121212;
     --border:rgb(192, 192, 192);
@@ -58,4 +58,17 @@ a{
     display:grid;
     place-items:center
 
+}
+
+.about{
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+    
+}
+
+.about > span{
+    font-size: 18px;
+    font-weight: 700;
+    color:var(--info)
 }
