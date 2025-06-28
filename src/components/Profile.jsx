@@ -14,6 +14,7 @@ const Profile = () => {
     const user = useUser();
 
 
+
   return  ( 
         <main className="channel-page">
         <Container>

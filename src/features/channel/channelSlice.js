@@ -17,6 +17,25 @@ export const loadChannel = createAsyncThunk(
       }
     }
 );
+
+
+
+export const subscribeChannel = createAsyncThunk(
+  'channel/subscribe',
+  async (channelId ,{ rejectWithValue }) => {
+    try {
+      const response = await axios.post(utils.join('channels' , channelId  , 'subscribe') , {} , {
+          headers: {
+              Authorization: `Bearer ${localStorage.token}`
+          }
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
   
 
 const channelSlice = createSlice({
@@ -51,6 +70,34 @@ const channelSlice = createSlice({
             state.channel = action.payload.data.channel;
              
         })
+
+
+        // Subscribe Channel
+
+
+
+          builder.addCase(subscribeChannel.pending , (state) => {
+            state.isLoading = true;
+            state.errors = null;
+        })
+
+        // Rejected Load Channel
+
+        .addCase(subscribeChannel.rejected , (state , action) => {
+            state.isLoading = false;
+            state.status = 400;
+        })
+        
+        // Fulfilled Load Channel
+        
+        .addCase(subscribeChannel.fulfilled , (state , action) => {
+            state.isLoading = false;
+            state.errors = null;
+            
+        })
+
+
+
     }
 
 })  

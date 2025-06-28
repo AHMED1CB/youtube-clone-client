@@ -3,7 +3,7 @@ import  { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate, useParams } from 'react-router-dom';
 import { useUser } from '../contexts/User';
-import { loadChannel } from '../features/channel/channelSlice';
+import { loadChannel, subscribeChannel } from '../features/channel/channelSlice';
 import '../styles/Channel.css'; 
 import Loading from './Loading';
 import ChannelShorts from './ChannelShorts';
@@ -12,6 +12,7 @@ import Videos from './Videos';
 const Channel = () => {
 
     const dispatch = useDispatch();
+    const [isSubscribed , setIsSubscribed] = useState(false);
 
     const go = useNavigate();
 
@@ -27,6 +28,7 @@ const Channel = () => {
     
     let {channelUsername} = useParams();   
 
+
    useEffect(() => {
 
         if (channelUsername == profileUser.username){
@@ -34,8 +36,17 @@ const Channel = () => {
         }
 
         // get User By Username
-        if (channel){
+        if (channel && channel.username == channelUsername){
+            
+            channel.subscribers.map(subscriber => {
+                if (subscriber.subscriber == profileUser.id ){
+                    setIsSubscribed(true);
+                }
+            })
+
             setUser(channel)
+
+
         }else{
             dispatch(loadChannel(channelUsername));
         }
@@ -45,9 +56,16 @@ const Channel = () => {
    }, [channel])
 
 
+   function subscriberChannel(){
+    
+        dispatch(subscribeChannel(channel.id));
+
+        setIsSubscribed((o) => !o);
+
+   }
 
 
-  return user && !isLoading && ( 
+  return user && ( 
         <main className="channel-page">
         <Container>
 
@@ -66,8 +84,8 @@ const Channel = () => {
                 </div>
             </div>
             {
-                <button className={`subscribe-button`}>
-                    SUBSCRIBE
+                <button className={`subscribe-button`} disabled={isLoading} onClick={subscriberChannel}>
+                    {isSubscribed ? 'UNSUBSCRIBE' : 'SUBSCRIBE'}
                 </button>
             }
             </div>
