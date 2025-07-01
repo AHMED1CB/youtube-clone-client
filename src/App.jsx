@@ -19,21 +19,13 @@ import {setLoading} from './features/Display/DisplaySlice';
 import { useEffect } from 'react';
 import Login from './components/Login';
 import Register from './components/Register';
-
+import EditProfile from './components/EditProfile';
 
 
 function App() {
 
   const mode = useSelector((state) => state.display.mode );
   
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-       
-    dispatch(setLoading(false))
-
-  } , [])
 
 
 
@@ -47,6 +39,7 @@ function App() {
                     <Route path="/" element={<MainLayout/>}>
                         <Route index element={<HomePage/>} />
                         <Route path="profile"  element={<Profile/>  } />
+                        <Route path="profile/edit" element={<EditProfile/>  } />
                     </Route>
 
                     <Route path="/auth" >

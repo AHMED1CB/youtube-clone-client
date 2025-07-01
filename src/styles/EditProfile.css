@@ -1,0 +1,111 @@
+.profile-edit-page {
+    width: 90%;
+    box-sizing: border-box;
+    overflow: auto;
+    margin: auto;
+}
+  
+  
+  
+  .profile-content {
+    margin: 0 auto;
+    background-color: var(--bg);
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 40px;
+}
+  
+  .avatar-section {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .avatar-container {
+    text-align: center;
+  }
+  
+  .profile-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid var(--border);
+    cursor: pointer;
+  }
+  
+  .avatar-upload-input {
+    display: none;
+  }
+  
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  
+  .form-group label {
+    color:var(--info);
+    margin-bottom: 8px;
+}
+  
+  .form-input{
+    padding: 12px 15px;
+    border: 1px solid var(--border);
+    background-color: transparent;
+    border-radius: 5px;
+    font-size: 16px;
+    color:var(--text)
+  }
+  
+  .form-input:focus, .form-textarea:focus {
+    outline: none;
+    border-color: var(--border);
+  }
+  
+  .form-textarea {
+    resize: vertical;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .cancel-button {
+    padding: 10px 20px;
+    background-color: var(--activeBg);
+    color: var(--activeText);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .cancel-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .save-button {
+    padding: 10px 20px;
+    background-color: var(--activeBg);
+    color: var(--activeText);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .save-button:hover {
+    background-color: #e0e0e0;
+  }

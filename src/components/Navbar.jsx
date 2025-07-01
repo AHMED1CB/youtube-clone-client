@@ -7,8 +7,6 @@ export default () => {
 
     const { expanded } = useSelector((state) => state.display );
     
-    const isLoading  = useSelector((state) => state.display.isLoading );
-    
     const dispatch = useDispatch();
 
     const path = useLocation().pathname;
@@ -39,7 +37,7 @@ export default () => {
         dispatch(setExpanded(state))
     }
 
-    return !isLoading &&   (
+    return   (
         
         <nav className={`navbar ${expanded ? 'expanded' : ''}`} onMouseEnter={() => {expandMenu(true)}} onMouseLeave={() => {expandMenu(false)}}> 
 
