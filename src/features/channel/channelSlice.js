@@ -46,7 +46,13 @@ const channelSlice = createSlice({
       errors: null,
       status: 0
     },
-    reducers: {},
+    reducers: {
+
+      setChannel : (state,action) =>{
+        state.channel = action.payload;
+      }
+
+    },
 
     extraReducers: (builder) => {
         builder.addCase(loadChannel.pending , (state) => {
@@ -103,5 +109,7 @@ const channelSlice = createSlice({
 })  
 
 
+
+export const {setChannel} = channelSlice.actions
 
 export default channelSlice.reducer

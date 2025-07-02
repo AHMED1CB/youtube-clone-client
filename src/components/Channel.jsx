@@ -3,7 +3,7 @@ import  { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate, useParams } from 'react-router-dom';
 import { useUser } from '../contexts/User';
-import { loadChannel, subscribeChannel } from '../features/channel/channelSlice';
+import { loadChannel, setChannel, subscribeChannel } from '../features/channel/channelSlice';
 import '../styles/Channel.css'; 
 import Loading from './Loading';
 import ChannelShorts from './ChannelShorts';
@@ -12,11 +12,12 @@ import Videos from './Videos';
 const Channel = () => {
 
     const dispatch = useDispatch();
-    const [isSubscribed , setIsSubscribed] = useState(false);
-
+    
     const go = useNavigate();
-
+    
     const channel =  useSelector(state => state.channel.channel);
+    
+    const [isSubscribed , setIsSubscribed] = useState(false);
 
     const isLoading =  useSelector(state => state.channel.isLoading);
     
@@ -35,14 +36,9 @@ const Channel = () => {
             go('/profile')
         }
 
-        // get User By Username
         if (channel && channel.username == channelUsername){
             
-            channel.subscribers.map(subscriber => {
-                if (subscriber.subscriber == profileUser.id ){
-                    setIsSubscribed(true);
-                }
-            })
+            setIsSubscribed(channel.is_subscribed);
 
             setUser(channel)
 
@@ -60,7 +56,10 @@ const Channel = () => {
     
         dispatch(subscribeChannel(channel.id));
 
-        setIsSubscribed((o) => !o);
+        dispatch(setChannel({...channel , is_subscribed: !channel.is_subscribed}));
+
+        console.log(channel)
+        setIsSubscribed(channel.is_subscribed);
 
    }
 
