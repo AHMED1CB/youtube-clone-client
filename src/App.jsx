@@ -20,6 +20,7 @@ import { useEffect } from 'react';
 import Login from './components/Login';
 import Register from './components/Register';
 import EditProfile from './components/EditProfile';
+import VideoPage from './components/VideoPage';
 
 
 function App() {
@@ -42,6 +43,13 @@ function App() {
                         <Route path="profile/edit" element={<EditProfile/>  } />
                     </Route>
 
+
+          
+                    <Route path="/profile" element={<MainLayout/>}>
+                        <Route index  element={<Profile/>  } />
+                        <Route path="edit" element={<EditProfile/>  } />
+                    </Route>
+
                     <Route path="/auth" >
                         <Route path="login" element={<Login/>} />
                         <Route path="register" element={<Register/>} />
@@ -59,10 +67,7 @@ function App() {
                         <Route path="short" element={<UploadShort/>}  />
 
                     </Route>
-
-
                       
-                      {/* Replace Later With Dynamic Route */}
 
                     <Route path="/channel" element={<MainLayout/>}>
                     
@@ -70,7 +75,15 @@ function App() {
                     
                     </Route>
 
+                    <Route path="/videos" element={<MainLayout/>}>
+                    
+                        <Route path=":videoSlug" element={<VideoPage/> } />
+                    
+                    </Route>
+
                   
+
+
                   </Routes>
           </CssBaseline>
       </ThemeProvider>

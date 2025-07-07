@@ -21,7 +21,7 @@ export default ({data}) => {
       
         <div className="videoCard" >
       
-            <div className="video-cover">
+            <div className="video-cover" onClick={() => go(`/videos/${data.slug}`)} >
                 <CardMedia 
 
                     component="img"

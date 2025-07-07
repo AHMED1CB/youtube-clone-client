@@ -7,6 +7,8 @@ import { useSelector , useDispatch} from 'react-redux';
 import { useEffect } from "react";
 import { getShorts } from "../features/videos/VideosSlice";
 
+import Loading from './Loading'
+
 export default () => {
 
     
@@ -34,8 +36,8 @@ export default () => {
                         shorts?.length > 0 &&  
                         (
                                 shortVideos
-                        ) || (isLoading && <h2 className="heading">Loading Shorts</h2>) || (
-                            shorts?.length == 0 && <h2 className="heading">no Short Videos On App</h2>
+                        ) || (isLoading && <Loading/>) || (
+                            shorts?.length == 0 && <h2 className="heading">No Short Videos On App</h2>
                         )
                     }
 

@@ -57,8 +57,7 @@ const Channel = () => {
         dispatch(subscribeChannel(channel.id));
 
         dispatch(setChannel({...channel , is_subscribed: !channel.is_subscribed}));
-
-        console.log(channel)
+        
         setIsSubscribed(channel.is_subscribed);
 
    }

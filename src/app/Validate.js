@@ -56,8 +56,7 @@ export const  validateUploadVideo = (data) => {
     if (data.video && data.video.type.startsWith('video') && data.title?.trim() && data.descreption?.trim() ){
     
         isValid = true;
-    
-        if (data.cover && !data.cover.startsWith('image')){
+        if (data.cover && !data.cover.type.startsWith('image')){
             isValid = false;
         }
     }else{

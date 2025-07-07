@@ -5,7 +5,9 @@ import axios from 'axios';
 export const getVideos = createAsyncThunk('videos/getRandom' , async (count , {rejectWithValue}) => {
 
     try{
-        const response = await axios.post(utils.join('videos'));
+        const response = await axios.post(utils.join('videos') , {} , {headers: {
+            Authorization: `Bearer ${localStorage.token}`
+        }});
     
         return response.data;
     }catch(error){
@@ -13,6 +15,26 @@ export const getVideos = createAsyncThunk('videos/getRandom' , async (count , {r
     }
 
 });
+
+
+export const getVideo = createAsyncThunk('videos/getBySlug' , async (slug , {rejectWithValue}) => {
+
+    try{
+        const response = await axios.post(utils.join('videos' , slug) , {} , {headers: {
+            Authorization: `Bearer ${localStorage.token}`
+        }});
+
+        // Adding View
+
+
+
+        return response.data;
+    }catch(error){
+        return rejectWithValue(error)
+    }
+
+});
+
 
 
 
@@ -72,6 +94,7 @@ const VideosSlice = createSlice({
     name: 'video',
     initialState: {
       videos: null,
+      video: null,
       shorts: null,
       isLoading: false,
       errors: null,
@@ -82,6 +105,7 @@ const VideosSlice = createSlice({
                 state.isLoading = false;
                 state.errors = null;
                 state.isUploaded =false;
+                state.video =false;
 
         }
     },
@@ -150,6 +174,25 @@ const VideosSlice = createSlice({
             state.isLoading = false;
             state.isUploaded = true;
         }) 
+
+        // Load Video
+
+
+        builder.addCase(getVideo.pending , (state) => {
+            state.isLoading = true;
+        }) 
+
+        builder.addCase(getVideo.rejected , (state , action) => {
+            state.isLoading = false;
+            state.errors = action.payload?.response?.data?.data?.errors || {server: 'Internal Server Error'};
+        }) 
+
+        builder.addCase(getVideo.fulfilled , (state , action) => {
+            state.isLoading = false;
+            state.isUploaded = true;
+            state.video = action.payload.data.video;
+        }) 
+
 
 
     }
