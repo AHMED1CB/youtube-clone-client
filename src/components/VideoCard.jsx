@@ -12,6 +12,10 @@ import FlexBox from './mui/FlexBox';
 
 export default ({data}) => {
 
+    if (data.video && typeof data.video != 'string'){
+        data = data.video;
+    }
+
     const profileImg =  data.channel.profile_photo ? utils.storage + data.channel.profile_photo : '/user.png'; 
     
     const go = useNavigate();
@@ -58,7 +62,7 @@ export default ({data}) => {
                     </Typography>
 
                     <Typography variant="body2" color="text.secondary" className="video-details">
-                            {data.views?.length || 0} views • {data.creation_date} { /* Changing Date Later*/ }
+                            {data.views_count} views • {data.creation_date} { /* Changing Date Later*/ }
                     </Typography>
                 </FlexBox>    
 

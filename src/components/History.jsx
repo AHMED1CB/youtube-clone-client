@@ -12,9 +12,9 @@ export default () => {
 
     const user  = useUser();
     
-    const [historyState , setHistoryState] = useState(null);
+    const [historyState , setHistoryState] = useState(user.historyState);
 
-    const historyVideos = user.history;
+    const [historyVideos , setHistoryVideos] = useState(user.history);
 
     const dispatch = useDispatch();
     
@@ -32,6 +32,7 @@ export default () => {
     }
     
     const clearHistory = () => {
+        setHistoryVideos([]);x
         dispatch(clearHistoryVideos())
     }
 
@@ -67,7 +68,7 @@ export default () => {
 
                     <div className="history-videos">
                     {historyVideos.length > 0 && 
-                        <Videos/>
+                        <Videos videos={historyVideos}/>
                     || <h2 className="heading">No Videos in your History</h2>
                     }
                     
