@@ -32,7 +32,7 @@ export default () => {
     }
     
     const clearHistory = () => {
-        setHistoryVideos([]);x
+        setHistoryVideos([]);
         dispatch(clearHistoryVideos())
     }
 

@@ -20,7 +20,6 @@ export default ({data}) => {
     
     const go = useNavigate();
     
-
     return (
       
         <div className="videoCard" >
@@ -62,7 +61,7 @@ export default ({data}) => {
                     </Typography>
 
                     <Typography variant="body2" color="text.secondary" className="video-details">
-                            {data.views_count} views • {data.creation_date} { /* Changing Date Later*/ }
+                            {data.views_count ?? 0} views • {data.creation_date} 
                     </Typography>
                 </FlexBox>    
 

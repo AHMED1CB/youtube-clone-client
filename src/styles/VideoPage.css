@@ -115,7 +115,9 @@
     cursor: pointer;
     font-size: 14px;
     color: var(--info);
+    transition:.3s
   }
+
   
   .video-page .action-btn:hover {
     background-color: #f2f2f2;

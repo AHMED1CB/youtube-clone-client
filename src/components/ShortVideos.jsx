@@ -15,7 +15,6 @@ export default () => {
 
     const shorts = useSelector(state => state.videos.shorts);
     const isLoading = useSelector(state => state.videos.isLoading);
-
     const dispatch = useDispatch();
 
     useEffect(() =>{

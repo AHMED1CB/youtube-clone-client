@@ -5,7 +5,7 @@ import axios from 'axios';
 export const getVideos = createAsyncThunk('videos/getRandom' , async (count , {rejectWithValue}) => {
 
     try{
-        const response = await axios.post(utils.join('videos') , {} , {headers: {
+        const response = await axios.get(utils.join('videos') , {headers: {
             Authorization: `Bearer ${localStorage.token}`
         }});
     
@@ -20,12 +20,11 @@ export const getVideos = createAsyncThunk('videos/getRandom' , async (count , {r
 export const getVideo = createAsyncThunk('videos/getBySlug' , async (slug , {rejectWithValue}) => {
 
     try{
-        const response = await axios.post(utils.join('videos' , slug) , {} , {headers: {
+        const response = await axios.get(utils.join('videos' , slug) , {headers: {
             Authorization: `Bearer ${localStorage.token}`
         }});
 
         // Adding View
-
 
 
         return response.data;
@@ -38,10 +37,12 @@ export const getVideo = createAsyncThunk('videos/getBySlug' , async (slug , {rej
 
 
 
-export const getShorts = createAsyncThunk('videos/getRanodmShorts' , async (count , {rejectWithValue}) => {
+export const getShorts = createAsyncThunk('videos/getRanodmShorts' , async ({rejectWithValue}) => {
 
     try{
-        const response = await axios.post(utils.join('shorts'));
+        const response = await axios.get(utils.join('shorts') , {headers: {
+            Authorization: `Bearer ${localStorage.token}`
+        }});
     
         return response.data;
     }catch(error){
@@ -50,12 +51,10 @@ export const getShorts = createAsyncThunk('videos/getRanodmShorts' , async (coun
 
 });
 
-
-
 export const uploadVideo = createAsyncThunk('videos/upload' , async (data , {rejectWithValue}) => {
 
     try{
-        const response = await axios.post(utils.join('videos' , 'upload') , data ,  {
+        const response = await axios.post(utils.join('videos' , 'upload') , data , {
             headers:{
                 Authorization: `Bearer ${localStorage.token}`
             },

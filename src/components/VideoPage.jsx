@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect , useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { utils } from '../app/utils';
@@ -7,11 +7,13 @@ import '../styles/VideoPage.css';
 import Loading from './Loading';
 import Icon from './Icon';
 import { useUser } from '../contexts/User';
+import {subscribeChannel} from '../features/channel/ChannelSlice'
 
 const VideoPage = () => {
   
   const video = useSelector(state => state.videos.video);
-  const relatedVideos = video?.more_videos;
+
+  const [relatedVideos , setRelatedVideos] = useState(null);
 
   const isLoading = useSelector(state => state.videos.isLoading);
 
@@ -21,14 +23,16 @@ const VideoPage = () => {
 
   const channelCover = video && video.channel.cover ?  utils.storage + video.channel?.cover : '/user.png'
 
-    const go = useNavigate();
+  const go = useNavigate();
 
+  const [isSubscribed , setIsSubscribed ] = useState(video?.channel?.is_subscribed || null); 
+  
+  const channelLoading = useSelector(state => state.channel.isLoading);
  const currentUser = useUser();
 
   useEffect(() => {
 
     if (!video || video.slug != videoSlug){
-        
         // Get Video
 
         dispatch(reset());
@@ -36,11 +40,25 @@ const VideoPage = () => {
         dispatch(getVideo(videoSlug))
         
     }
+
+    if (video){
+      setRelatedVideos(video.more_videos)
+      setIsSubscribed(video.channel.is_subscribed)
+    }
+
   } , [video , videoSlug])  
 
+  const subscribe = () => {
+
+    setIsSubscribed(o => !o);
+
+    dispatch(subscribeChannel(video.channel.id))
+
+
+  }
   
 
-  return  video && (
+  return  video && video.slug == videoSlug && (
     <div className="video-page">
       <div className="video-container">
         <div className="video-player">
@@ -51,16 +69,16 @@ const VideoPage = () => {
           <h1 className="video-title">{video.title}</h1>
           
           <div className="video-meta">
-            <div className="channel-info" onClick={() => go(`/channel/${video.channel.username}`)}>
-              <div className="channel-avatar">
-                <img src={channelCover} alt={video.channel.name} />
+            <div className="channel-info" >
+              <div className="channel-avatar" onClick={() => go(`/channel/${video.channel.username}`)}>
+                <img src={channelCover} alt={video.channel.name} onClick={() => go(`/channel/${video.channel.username}`)} />
               </div>
               <div className="channel-details">
                 <h3 className="channel-name">{video.channel.name}</h3>
                 <span className="subscribers">{video.channel.subscriber}</span>
               </div>
               {video.channel.id !== currentUser.id && 
-                <button className="subscribe-btn">Subscribe</button>
+                <button className="subscribe-btn" disabled={channelLoading} onClick={subscribe}>{isSubscribed ? 'Unsubscribe' : 'Subscribe'}</button>
                }
             </div>
             
@@ -74,6 +92,10 @@ const VideoPage = () => {
                 <Icon icon="thumbs-up" /> {video.reactions_count}
                 </button>
 
+                <button className="action-btn like">
+                <Icon icon="chat" /> {video.comments_count}
+                </button>
+
               </div>
             </div>
           </div>
@@ -83,7 +105,7 @@ const VideoPage = () => {
       <div className="related-videos">
         <h3 className="related-title">Up next</h3>
         
-        {relatedVideos.leangh > 0 &&relatedVideos.map(relatedVideo => (
+        {relatedVideos && relatedVideos.map(relatedVideo => (
           <div className="related-video-card" onClick={() => go(`/videos/${relatedVideo.slug}`)} key={relatedVideo.id}>
             <div className="related-thumbnail">
               <img src={utils.storage + relatedVideo.cover} alt={relatedVideo.title} />

@@ -6,7 +6,7 @@ export const loadChannel = createAsyncThunk(
     'channel/get',
     async (channelUsername ,{ rejectWithValue }) => {
       try {
-        const response = await axios.post(utils.join('channels' , channelUsername) , {} , {
+        const response = await axios.get(utils.join('channels' , channelUsername) , {
             headers: {
                 Authorization: `Bearer ${localStorage.token}`
             }
