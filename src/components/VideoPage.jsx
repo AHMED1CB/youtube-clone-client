@@ -2,7 +2,7 @@ import { useEffect , useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { utils } from '../app/utils';
-import { getVideo, reset } from '../features/videos/VideosSlice';
+import { getVideo, reactOnVideo, reset, setVideoData } from '../features/videos/VideosSlice';
 import '../styles/VideoPage.css';
 import Loading from './Loading';
 import Icon from './Icon';
@@ -26,7 +26,7 @@ const VideoPage = () => {
   const go = useNavigate();
 
   const [isSubscribed , setIsSubscribed ] = useState(video?.channel?.is_subscribed || null); 
-  
+
   const channelLoading = useSelector(state => state.channel.isLoading);
  const currentUser = useUser();
 
@@ -44,6 +44,7 @@ const VideoPage = () => {
     if (video){
       setRelatedVideos(video.more_videos)
       setIsSubscribed(video.channel.is_subscribed)
+      
     }
 
   } , [video , videoSlug])  
@@ -56,6 +57,22 @@ const VideoPage = () => {
 
 
   }
+
+
+  const reactVideo = () => {
+
+      if (video.is_reacted){
+          // Reactions - 1
+          dispatch(setVideoData({...video , reactions_count : video.reactions_count - 1 , is_reacted:false}))
+            
+      }else{
+          // Reactions + 1
+  
+          dispatch(setVideoData({...video , reactions_count : video.reactions_count + 1  , is_reacted:true}))
+
+      }
+      dispatch(reactOnVideo(video.id));
+  }
   
 
   return  video && video.slug == videoSlug && (
@@ -63,6 +80,7 @@ const VideoPage = () => {
       <div className="video-container">
         <div className="video-player">
                 <video src={utils.videosStorage + video?.video} autoPlay paused='true' poster={utils.storage + video.cover} controls></video> 
+        
         </div>
         
         <div className="video-info">
@@ -88,11 +106,11 @@ const VideoPage = () => {
               
               <div className="actions">
                 
-                <button className="action-btn like">
+                <button className={`action-btn like ${video.is_reacted ? 'active' : ''}`} disabled={isLoading} onClick={reactVideo}>
                 <Icon icon="thumbs-up" /> {video.reactions_count}
                 </button>
 
-                <button className="action-btn like">
+                <button className="action-btn commen">
                 <Icon icon="chat" /> {video.comments_count}
                 </button>
 

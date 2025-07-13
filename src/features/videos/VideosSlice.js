@@ -89,6 +89,27 @@ export const uploadShort = createAsyncThunk('shorts/upload' , async (data , {rej
 
 
 
+export const reactOnVideo = createAsyncThunk('video/react' , async (video , {rejectWithValue}) => {
+
+    try{
+        const response = await axios.post(utils.join('videos' , video , 'react') , {} ,  {
+            headers:{
+                Authorization: `Bearer ${localStorage.token}`
+            },
+            
+        });
+    
+        return response.data;
+        
+    }catch(error){
+        return rejectWithValue(error)
+    }
+
+});
+
+
+
+
 const VideosSlice = createSlice({
     name: 'video',
     initialState: {
@@ -106,6 +127,10 @@ const VideosSlice = createSlice({
                 state.isUploaded =false;
                 state.video =false;
 
+        },
+
+        setVideoData : (state , action) => {
+            state.video = action.payload;
         }
     },
 
@@ -193,12 +218,28 @@ const VideosSlice = createSlice({
         }) 
 
 
+        // React Video
+
+        builder.addCase(reactOnVideo.pending , (state) => {
+            state.isLoading = true;
+        }) 
+
+        builder.addCase(reactOnVideo.rejected , (state , action) => {
+            state.isLoading = false;
+            state.errors = action.payload?.response?.data?.data?.errors || {server: 'Internal Server Error'};
+        }) 
+
+        builder.addCase(reactOnVideo.fulfilled , (state , action) => {
+            state.isLoading = false;
+        }) 
+
+
 
     }
 
 })
 
-export const { reset } = VideosSlice.actions;
+export const { reset  , setVideoData} = VideosSlice.actions;
 
 export default VideosSlice.reducer;
 
