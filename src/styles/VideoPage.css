@@ -120,7 +120,7 @@
 
   
   .video-page .action-btn:hover , .video-page .action-btn.active{
-    background-color: #f2f2f2;
+    background-color: var(--activeBg);
   }
   
   .related-videos {

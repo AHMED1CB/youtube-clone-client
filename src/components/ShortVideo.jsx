@@ -3,15 +3,18 @@ import Icon from "./Icon";
 import { utils } from "../app/utils";
 import { useEffect, useRef, useState } from "react";
 import '../styles/Shorts.css'
+import { useDispatch } from "react-redux";
+import { subscribeChannel } from "../features/channel/ChannelSlice";
 
-export default ({ data }) => {
+export default ({ data , currentUser }) => {
     const videoRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
-
+    const [isSubscribed, setIsSubscribed] = useState(data.channel.is_subscribed ?? null);
     // Auto Play
 
     useEffect(() => {
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
@@ -31,6 +34,7 @@ export default ({ data }) => {
     
         return () => observer.disconnect();
     }, []);
+
 
 
     // Change Progress 
@@ -60,6 +64,18 @@ export default ({ data }) => {
             videoRef.current.pause();
         }
     };
+
+    // Subscribe Action
+
+    const dispatch = useDispatch();
+
+
+    const subscribe = () => {
+        setIsSubscribed(!isSubscribed);
+        dispatch(subscribeChannel(data.channel.id));
+        
+    }
+
 
     return (
         <div className="shorts-container">
@@ -114,13 +130,16 @@ export default ({ data }) => {
                         className="shorts-channel-avatar" 
                     />
                     <span className="shorts-channel-name">{data.channel.name}</span>
+                    {data.channel.id != currentUser.id && 
                     <Button 
                         variant="contained" 
                         size="small" 
                         className="shorts-subscribe-btn"
-                    >   
-                        Subscribe
-                    </Button>
+                        onClick={subscribe}
+                    >
+                           
+                        {isSubscribed ? 'Unsubscribe' : 'subscribe'}
+                    </Button>}
                 </div>
                 
                 <p className="shorts-title">{data.title}</p>

@@ -2,13 +2,13 @@ import { useEffect , useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { utils } from '../app/utils';
-import { getVideo, reactOnVideo, reset, setVideoData } from '../features/videos/VideosSlice';
+import { getVideo, reactOnVideo, reset, setVideoData , setVideoChannel } from '../features/videos/VideosSlice';
 import '../styles/VideoPage.css';
 import Loading from './Loading';
 import Icon from './Icon';
 import { useUser } from '../contexts/User';
 import {subscribeChannel} from '../features/channel/ChannelSlice'
-
+import RelatedVideo from './RelatedVideo'
 const VideoPage = () => {
   
   const video = useSelector(state => state.videos.video);
@@ -54,6 +54,8 @@ const VideoPage = () => {
     setIsSubscribed(o => !o);
 
     dispatch(subscribeChannel(video.channel.id))
+
+    dispatch(setVideoChannel({...video.channel , is_subscribed : !video.channel.is_subscribed}))
 
 
   }
@@ -124,17 +126,9 @@ const VideoPage = () => {
         <h3 className="related-title">Up next</h3>
         
         {relatedVideos && relatedVideos.map(relatedVideo => (
-          <div className="related-video-card" onClick={() => go(`/videos/${relatedVideo.slug}`)} key={relatedVideo.id}>
-            <div className="related-thumbnail">
-              <img src={utils.storage + relatedVideo.cover} alt={relatedVideo.title} />
-              <span className="duration">{relatedVideo.duration}</span>
-            </div>
-            <div className="related-info">
-              <h4 className="related-video-title">{relatedVideo.title}</h4>
-              <p className="related-channel">{relatedVideo.channel.name}</p>
-              <p className="related-stats">{relatedVideo.views_count} • {relatedVideo.creation_date}</p>
-            </div>
-          </div>
+        
+            <RelatedVideo utils={utils} data={relatedVideo} key={relatedVideo.id}/>
+        
         ))||<h2 className="heading">No More Vidoes</h2> }
 
 

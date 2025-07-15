@@ -37,13 +37,14 @@ export const getVideo = createAsyncThunk('videos/getBySlug' , async (slug , {rej
 
 
 
-export const getShorts = createAsyncThunk('videos/getRanodmShorts' , async ({rejectWithValue}) => {
+export const getShorts = createAsyncThunk('videos/getRanodmShorts' , async (_ , {rejectWithValue}) => {
 
     try{
-        const response = await axios.get(utils.join('shorts') , {headers: {
+        const response = await axios.get(utils.join('shorts') , {
+            headers: {
             Authorization: `Bearer ${localStorage.token}`
-        }});
-    
+        }
+    });
         return response.data;
     }catch(error){
         return rejectWithValue(error)
@@ -100,7 +101,7 @@ export const reactOnVideo = createAsyncThunk('video/react' , async (video , {rej
         });
     
         return response.data;
-        
+
     }catch(error){
         return rejectWithValue(error)
     }
@@ -131,6 +132,9 @@ const VideosSlice = createSlice({
 
         setVideoData : (state , action) => {
             state.video = action.payload;
+        },
+        setVideoChannel : (state , action) => {
+            state.video.channel = action.payload;
         }
     },
 
@@ -163,7 +167,6 @@ const VideosSlice = createSlice({
         builder.addCase(getShorts.fulfilled , (state , action) => {
             state.isLoading = false;
             state.shorts = action.payload.data.videos;
-
         }) 
 
 
@@ -239,7 +242,7 @@ const VideosSlice = createSlice({
 
 })
 
-export const { reset  , setVideoData} = VideosSlice.actions;
+export const { reset  , setVideoData , setVideoChannel } = VideosSlice.actions;
 
 export default VideosSlice.reducer;
 
