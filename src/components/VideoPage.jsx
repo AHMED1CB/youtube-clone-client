@@ -13,7 +13,7 @@ const VideoPage = () => {
   
   const video = useSelector(state => state.videos.video);
 
-  const [relatedVideos , setRelatedVideos] = useState(null);
+  const [relatedVideos , setRelatedVideos] = useState([]);
 
   const isLoading = useSelector(state => state.videos.isLoading);
 
@@ -69,7 +69,6 @@ const VideoPage = () => {
             
       }else{
           // Reactions + 1
-  
           dispatch(setVideoData({...video , reactions_count : video.reactions_count + 1  , is_reacted:true}))
 
       }
@@ -125,11 +124,11 @@ const VideoPage = () => {
       <div className="related-videos">
         <h3 className="related-title">Up next</h3>
         
-        {relatedVideos && relatedVideos.map(relatedVideo => (
+        { relatedVideos.length > 0 && relatedVideos.map(relatedVideo => (
         
             <RelatedVideo utils={utils} data={relatedVideo} key={relatedVideo.id}/>
         
-        ))||<h2 className="heading">No More Vidoes</h2> }
+        )) ||<h2 className="heading">No More Vidoes</h2> }
 
 
       </div>

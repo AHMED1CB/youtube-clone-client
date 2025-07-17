@@ -68,7 +68,7 @@ export default () => {
 
                     <div className="history-videos">
                     {historyVideos.length > 0 && 
-                        <Videos videos={historyVideos}/>
+                        <Videos videos={historyVideos} channel={user}/>
                     || <h2 className="heading">No Videos in your History</h2>
                     }
                     

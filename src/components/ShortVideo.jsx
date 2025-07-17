@@ -5,13 +5,14 @@ import { useEffect, useRef, useState } from "react";
 import '../styles/Shorts.css'
 import { useDispatch } from "react-redux";
 import { subscribeChannel } from "../features/channel/ChannelSlice";
-
+import { useNavigate } from 'react-router-dom'
 export default ({ data , currentUser }) => {
     const videoRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
     const [isSubscribed, setIsSubscribed] = useState(data.channel.is_subscribed ?? null);
     // Auto Play
+    const go = useNavigate();
 
     useEffect(() => {
 
@@ -127,9 +128,12 @@ export default ({ data , currentUser }) => {
                 <div className="shorts-channel-info">
                     <Avatar 
                         src={data.channel.profile_photo ?? '/user.png'} 
-                        className="shorts-channel-avatar" 
+                        className="shorts-channel-avatar"
+                        
+                        onClick={() => go(`/channel/${data.channel.username}`)}
                     />
-                    <span className="shorts-channel-name">{data.channel.name}</span>
+                    <span className="shorts-channel-name"
+                    >{data.channel.name}</span>
                     {data.channel.id != currentUser.id && 
                     <Button 
                         variant="contained" 

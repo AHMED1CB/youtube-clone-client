@@ -112,7 +112,7 @@ const Channel = () => {
             </button>
             </div>
             {activeTab == 'videos' ? (user.videos.length > 0 && 
-                <Videos videos={user.videos}/> || <h2 className="heading">No Videos Yet</h2>
+                <Videos videos={user.videos}  channel={user} /> || <h2 className="heading">No Videos Yet</h2>
             ) : (
                 activeTab == 'shorts' ? (
                     user.shorts.length > 0 && <ChannelShorts shorts={user.shorts}/> || <h2 className="heading">No Shorts Yet</h2>
