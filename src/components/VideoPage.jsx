@@ -9,11 +9,14 @@ import Icon from './Icon';
 import { useUser } from '../contexts/User';
 import {subscribeChannel} from '../features/channel/ChannelSlice'
 import RelatedVideo from './RelatedVideo'
+import Comments from './Comments';
+
 const VideoPage = () => {
   
   const video = useSelector(state => state.videos.video);
 
   const [relatedVideos , setRelatedVideos] = useState([]);
+  const [comments , setComments] = useState([]);
 
   const isLoading = useSelector(state => state.videos.isLoading);
 
@@ -44,7 +47,7 @@ const VideoPage = () => {
     if (video){
       setRelatedVideos(video.more_videos)
       setIsSubscribed(video.channel.is_subscribed)
-      
+      setComments(video.comments)
     }
 
   } , [video , videoSlug])  
@@ -116,7 +119,9 @@ const VideoPage = () => {
                 </button>
 
               </div>
+
             </div>
+              <Comments comments={comments} setComments={setComments} videoId={video.id}/>
           </div>
         </div>
       </div>
