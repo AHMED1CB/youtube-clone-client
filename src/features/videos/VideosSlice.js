@@ -131,6 +131,27 @@ export const commentOnVideo = createAsyncThunk('video/comment' , async (data , {
 
 
 
+export const commentOnShort = createAsyncThunk('short/comment' , async (data , {rejectWithValue}) => {
+
+    try{
+        const response = await axios.post(utils.join('shorts' , data.video , 'comment') , data ,  {
+            headers:{
+                Authorization: `Bearer ${localStorage.token}`
+            },
+            
+        });
+    
+        return response.data;
+
+    }catch(error){
+        return rejectWithValue(error)
+    }
+
+});
+
+
+
+
 const VideosSlice = createSlice({
     name: 'video',
     initialState: {
@@ -268,6 +289,21 @@ const VideosSlice = createSlice({
         }) 
 
         builder.addCase(commentOnVideo.fulfilled , (state , action) => {
+            state.isLoading = false;
+        }) 
+        
+        //------------------
+
+        builder.addCase(commentOnShort.pending , (state) => {
+            state.isLoading = true;
+        }) 
+
+        builder.addCase(commentOnShort.rejected , (state , action) => {
+            state.isLoading = false;
+            state.errors = action.payload?.response?.data?.data?.errors || {server: 'Internal Server Error'};
+        }) 
+
+        builder.addCase(commentOnShort.fulfilled , (state , action) => {
             state.isLoading = false;
         }) 
 

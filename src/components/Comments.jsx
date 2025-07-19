@@ -2,15 +2,15 @@ import React from 'react';
 import { utils } from '../app/utils';
 import '../styles/Comments.css'
 import CreateComment from './CreateComment';
-
-const Comments = ({ comments  , setComments , videoId }) => {
+import Icon from './Icon'
+const Comments = ({ comments  , setComments , videoId ,  type = 'video' }) => {
     
 
   return (
     <div className="comments-container">
       <h3 className="comments-title">Comments ({comments.length})</h3>
 
-            <CreateComment setComments={setComments} videoId={videoId}/>
+        <CreateComment setComments={setComments} videoId={videoId} type={type}/>
       
       <div className="comments-list">
         {comments.map(comment => (

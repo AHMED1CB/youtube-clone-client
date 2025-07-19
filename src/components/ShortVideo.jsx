@@ -6,13 +6,16 @@ import '../styles/Shorts.css'
 import { useDispatch } from "react-redux";
 import { subscribeChannel } from "../features/channel/ChannelSlice";
 import { useNavigate } from 'react-router-dom'
+import Comments from "./Comments";
 export default ({ data , currentUser }) => {
     const videoRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
     const [isSubscribed, setIsSubscribed] = useState(data.channel.is_subscribed ?? null);
-    // Auto Play
     const go = useNavigate();
+
+    let [showComments , setShowComments] = useState(false);
+    let [comments , setComments] = useState(data.comments);
 
     useEffect(() => {
 
@@ -20,10 +23,14 @@ export default ({ data , currentUser }) => {
             (entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        videoRef.current.play();
-                    } else {
-                        videoRef.current.pause();
-                    }
+
+                            videoRef.current.play();                        
+                    
+                        } else {
+                    
+                            videoRef.current.pause();
+                    
+                        }
                 });
             },
             { threshold: 0.7 }
@@ -35,7 +42,6 @@ export default ({ data , currentUser }) => {
     
         return () => observer.disconnect();
     }, []);
-
 
 
     // Change Progress 
@@ -59,6 +65,9 @@ export default ({ data , currentUser }) => {
     }, []);
 
     const togglePlay = () => {
+
+        toggleComments(false);
+
         if (videoRef.current.paused) {
             videoRef.current.play();
         } else {
@@ -77,6 +86,11 @@ export default ({ data , currentUser }) => {
         
     }
 
+    const toggleComments = (state) => {
+        state = state ?? !showComments;
+
+        setShowComments(state)
+    }
 
     return (
         <div className="shorts-container">
@@ -110,7 +124,7 @@ export default ({ data , currentUser }) => {
                     <Icon icon="thumbs-down" size={24} />
                 </div>
                 
-                <div className="shorts-control">
+                <div className="shorts-control" onClick={toggleComments}>
                     <Icon icon="chat" size={24} />
                     <span className="shorts-control-count">{data.comments_count}</span>
                 </div>
@@ -148,7 +162,20 @@ export default ({ data , currentUser }) => {
                 
                 <p className="shorts-title">{data.title}</p>
                 <p className="shorts-views">{data.views_count} views</p>
+            
+            
+
+
             </div>
+
+            <div className={`short-comments ${showComments ? '' : 'hidden'}`}>
+                <Comments comments={comments} setComments={setComments} type='short' videoId={data.id}/>
+            </div>
+
+            
+
+
+
         </div>
     );
 };

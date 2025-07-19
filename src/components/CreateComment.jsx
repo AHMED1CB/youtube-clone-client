@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useUser } from '../contexts/User';
-import { commentOnVideo } from '../features/videos/VideosSlice';
+import { commentOnShort, commentOnVideo } from '../features/videos/VideosSlice';
 import Icon from './Icon';
 
-const CreateComment = ({setComments , videoId}) => {
+const CreateComment = ({setComments , videoId , type}) => {
     const [comment , setComment] = useState('') 
     
     const user = useUser();
-
     const dispatch = useDispatch()
 
     const handleSubmit = (e) => {
@@ -17,7 +16,7 @@ const CreateComment = ({setComments , videoId}) => {
             let newComment = {
                 comment,
                 commentor:user,
-                id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+                id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER), // Just For Now
                 video: videoId
             }
 
@@ -25,8 +24,11 @@ const CreateComment = ({setComments , videoId}) => {
                 return [...old , newComment]
             })
             setComment('');
-            
-            dispatch(commentOnVideo(newComment))
+            if (type == 'video'){
+                dispatch(commentOnVideo(newComment))
+            }else{
+                dispatch(commentOnShort(newComment))
+            }
             
         
         }
