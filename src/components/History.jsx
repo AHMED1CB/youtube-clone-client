@@ -6,7 +6,7 @@ import SearchField from "./mui/SearchField";
 import  {  useUser  } from '../contexts/User';
 import { useEffect , useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeHistoryState , clearHistoryVideos} from "../features/user/UserSlice";
+import { changeHistoryState , clearHistoryVideos} from "../features/user/UserServices";
 
 export default () => {
 

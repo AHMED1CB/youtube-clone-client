@@ -11,7 +11,8 @@ import Icon from './Icon';
 import '../styles/UploadVideo.css';
 import { useState , useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getVideos, reset, uploadVideo } from '../features/videos/VideosSlice';
+import {  reset } from '../features/videos/VideosSlice';
+import { getVideos , uploadVideo } from '../features/videos/VideosServices';
 import { useNavigate } from 'react-router-dom'
 import { validateUploadVideo } from '../app/Validate';
 

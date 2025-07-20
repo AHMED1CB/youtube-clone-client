@@ -4,14 +4,18 @@ import { utils } from "../app/utils";
 import { useEffect, useRef, useState } from "react";
 import '../styles/Shorts.css'
 import { useDispatch } from "react-redux";
-import { subscribeChannel } from "../features/channel/ChannelSlice";
+import { subscribeChannel } from "../features/channel/channelServices";
 import { useNavigate } from 'react-router-dom'
 import Comments from "./Comments";
+import { reactOnShort } from "../features/videos/VideosServices";
 export default ({ data , currentUser }) => {
+
     const videoRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
     const [isSubscribed, setIsSubscribed] = useState(data.channel.is_subscribed ?? null);
+    const [isReacted, setIsReacted] = useState(data.is_reacted);
+    const [reactionCount, setReactionCount] = useState(data.reactions_count);
     const go = useNavigate();
 
     let [showComments , setShowComments] = useState(false);
@@ -21,17 +25,23 @@ export default ({ data , currentUser }) => {
 
         const observer = new IntersectionObserver(
             (entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
 
-                            videoRef.current.play();                        
-                    
+                entries.forEach(async (entry) => {
+                        if (entry.isIntersecting  ) {
+                                try{
+                                    await videoRef.current.play();                        
+                                }catch{}
+                                
                         } else {
-                    
-                            videoRef.current.pause();
-                    
+                                if(videoRef.current){
+                                    videoRef.current.pause();
+                                } 
+                                
                         }
-                });
+                            
+                    });
+            
+
             },
             { threshold: 0.7 }
         );
@@ -92,6 +102,18 @@ export default ({ data , currentUser }) => {
         setShowComments(state)
     }
 
+
+    const reactShort = () => {
+
+        let short = data.id;
+        
+        dispatch(reactOnShort(short));
+        
+        setIsReacted(o => !o);
+
+        setReactionCount((o) => isReacted ? o + -1 : o + 1 );
+    }
+
     return (
         <div className="shorts-container">
             <div className="shorts-player-container" onClick={togglePlay}>
@@ -115,9 +137,9 @@ export default ({ data , currentUser }) => {
             </div>
 
             <div className="shorts-side-controls">
-                <div className="shorts-control">
-                    <Icon icon="thumbs-up" size={24} />
-                    <span className="shorts-control-count">{data.reactions_count}</span>
+                <div className={`shorts-control`} onClick={reactShort}>
+                    <Icon icon="thumbs-up" size={24} filled={isReacted}/>
+                    <span className="shorts-control-count">{ reactionCount }</span>
                 </div>
                 
                 <div className="shorts-control">

@@ -4,7 +4,7 @@ import { Container } from '@mui/material'
 import '../styles/HomePage.css';
 import { useSelector , useDispatch} from 'react-redux';
 import { useEffect } from "react";
-import { getVideos } from "../features/videos/VideosSlice";
+import { getVideos } from "../features/videos/VideosServices";
 
 export default () => {
 

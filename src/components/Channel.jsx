@@ -3,7 +3,8 @@ import  { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate, useParams } from 'react-router-dom';
 import { useUser } from '../contexts/User';
-import { loadChannel, setChannel, subscribeChannel } from '../features/channel/channelSlice';
+import { setChannel } from '../features/channel/channelSlice';
+import { loadChannel, subscribeChannel } from '../features/channel/channelServices';
 import '../styles/Channel.css'; 
 import Loading from './Loading';
 import ChannelShorts from './ChannelShorts';
@@ -63,7 +64,7 @@ const Channel = () => {
    }
 
 
-  return user && ( 
+  return user && !isLoading && ( 
         <main className="channel-page">
         <Container>
 
@@ -128,7 +129,7 @@ const Channel = () => {
         </Container>
       
       </main>
-  ) || (isLoading && <Loading/>) || (!isLoading && !user &&  <h2 className="heading">User Not Found</h2>)
+  ) || isLoading && <Loading/> ||  <h2 className="heading">User Not Found</h2>
 };
 
 export default Channel;

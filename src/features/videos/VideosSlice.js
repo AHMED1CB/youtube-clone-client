@@ -1,153 +1,14 @@
-import { createAsyncThunk ,  createSlice } from '@reduxjs/toolkit'
-import { utils } from '../../app/utils';
-import axios from 'axios';
+import { createSlice } from '@reduxjs/toolkit'
 
-export const getVideos = createAsyncThunk('videos/getRandom' , async (count , {rejectWithValue}) => {
-
-    try{
-        const response = await axios.get(utils.join('videos') , {headers: {
-            Authorization: `Bearer ${localStorage.token}`
-        }});
-    
-        return response.data;
-    }catch(error){
-        return rejectWithValue(error)
-    }
-
-});
-
-
-export const getVideo = createAsyncThunk('videos/getBySlug' , async (slug , {rejectWithValue}) => {
-
-    try{
-        const response = await axios.get(utils.join('videos' , slug) , {headers: {
-            Authorization: `Bearer ${localStorage.token}`
-        }});
-
-        // Adding View
-
-
-        return response.data;
-    }catch(error){
-        return rejectWithValue(error)
-    }
-
-});
+import {getVideos , getVideo , getShorts , uploadVideo , uploadShort , reactOnVideo , commentOnVideo , commentOnShort , 
+    reactOnShort ,  loadShort} from './VideosServices'
 
 
 
 
-export const getShorts = createAsyncThunk('videos/getRanodmShorts' , async (_ , {rejectWithValue}) => {
-
-    try{
-        const response = await axios.get(utils.join('shorts') , {
-            headers: {
-            Authorization: `Bearer ${localStorage.token}`
-        }
-    });
-        return response.data;
-    }catch(error){
-        return rejectWithValue(error)
-    }
-
-});
-
-export const uploadVideo = createAsyncThunk('videos/upload' , async (data , {rejectWithValue}) => {
-
-    try{
-        const response = await axios.post(utils.join('videos' , 'upload') , data , {
-            headers:{
-                Authorization: `Bearer ${localStorage.token}`
-            },
-            
-        });
-    
-        return response.data;
-    }catch(error){
-        return rejectWithValue(error)
-    }
-
-});
 
 
 
-export const uploadShort = createAsyncThunk('shorts/upload' , async (data , {rejectWithValue}) => {
-
-    try{
-        const response = await axios.post(utils.join('shorts' , 'upload') , data ,  {
-            headers:{
-                Authorization: `Bearer ${localStorage.token}`
-            },
-            
-        });
-    
-        return response.data;
-    }catch(error){
-        return rejectWithValue(error)
-    }
-
-});
-
-
-
-export const reactOnVideo = createAsyncThunk('video/react' , async (video , {rejectWithValue}) => {
-
-    try{
-        const response = await axios.post(utils.join('videos' , video , 'react') , {} ,  {
-            headers:{
-                Authorization: `Bearer ${localStorage.token}`
-            },
-            
-        });
-    
-        return response.data;
-
-    }catch(error){
-        return rejectWithValue(error)
-    }
-
-});
-
-
-
-export const commentOnVideo = createAsyncThunk('video/comment' , async (data , {rejectWithValue}) => {
-
-    try{
-        const response = await axios.post(utils.join('videos' , data.video , 'comment') , data ,  {
-            headers:{
-                Authorization: `Bearer ${localStorage.token}`
-            },
-            
-        });
-    
-        return response.data;
-
-    }catch(error){
-        return rejectWithValue(error)
-    }
-
-});
-
-
-
-
-export const commentOnShort = createAsyncThunk('short/comment' , async (data , {rejectWithValue}) => {
-
-    try{
-        const response = await axios.post(utils.join('shorts' , data.video , 'comment') , data ,  {
-            headers:{
-                Authorization: `Bearer ${localStorage.token}`
-            },
-            
-        });
-    
-        return response.data;
-
-    }catch(error){
-        return rejectWithValue(error)
-    }
-
-});
 
 
 
@@ -158,6 +19,7 @@ const VideosSlice = createSlice({
       videos: null,
       video: null,
       shorts: null,
+      short: null,
       isLoading: false,
       errors: null,
       isUploaded: null
@@ -306,7 +168,39 @@ const VideosSlice = createSlice({
         builder.addCase(commentOnShort.fulfilled , (state , action) => {
             state.isLoading = false;
         }) 
+        
+        //------------------
 
+        builder.addCase(reactOnShort.pending , (state) => {
+            state.isLoading = true;
+        }) 
+
+        builder.addCase(reactOnShort.rejected , (state , action) => {
+            state.isLoading = false;
+            state.errors = action.payload?.response?.data?.data?.errors || {server: 'Internal Server Error'};
+        }) 
+
+        builder.addCase(reactOnShort.fulfilled , (state , action) => {
+            state.isLoading = false;
+        }) 
+
+
+        
+        //------------------
+
+        builder.addCase(loadShort.pending , (state) => {
+            state.isLoading = true;
+        }) 
+
+        builder.addCase(loadShort.rejected , (state , action) => {
+            state.isLoading = false;
+            state.errors = action.payload?.response?.data?.data?.errors || {server: 'Internal Server Error'};
+        }) 
+
+        builder.addCase(loadShort.fulfilled , (state , action) => {
+            state.isLoading = false;
+            state.short = action.payload.data.video;
+        }) 
 
 
     }

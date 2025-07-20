@@ -2,12 +2,11 @@ import { Routes , Route } from 'react-router-dom';
 
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { getModeTheme } from './app/Theme';
-import { useSelector , useDispatch} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import HomePage from './components/HomePage';
 import Upload from './components/Upload';
 import MainLayout from './layouts/MainLayout';
-import Subscriptions from './components/Subscriptions';
 import ShortsPage from './components/ShortVideos';
 import UploadVideo from './components/UploadVideo';
 import UploadShort from './components/UploadShort';
@@ -15,21 +14,16 @@ import History from './components/History';
 import Channel from './components/Channel';
 import Profile from './components/Profile';
 
-import {setLoading} from './features/Display/DisplaySlice';
-import { useEffect } from 'react';
 import Login from './components/Login';
 import Register from './components/Register';
 import EditProfile from './components/EditProfile';
 import VideoPage from './components/VideoPage';
+import ShortPage from './components/ShortPage';
 
 
 function App() {
 
   const mode = useSelector((state) => state.display.mode );
-  
-
-
-
 
   return  (
 
@@ -56,10 +50,19 @@ function App() {
                     </Route>
 
                     <Route path="/feed" element={<MainLayout/>}>
-                        <Route path="subscriptions" element={<Subscriptions/>} />
-                        <Route path="shorts" element={<ShortsPage/>} />
                         <Route path='history' element={<History/>} />
                     </Route>
+
+                    <Route path="/shorts" element={<MainLayout/>} >
+
+                    <Route index element={<ShortsPage/>} />
+
+                    <Route path=":slug" element={<ShortPage/>} />
+
+
+
+                    </Route>
+
 
                     <Route path="/upload" element={<MainLayout/>}>
                         <Route index element={<Upload/>}/>

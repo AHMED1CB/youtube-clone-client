@@ -11,7 +11,8 @@ import {
   import '../styles/UploadVideo.css';
   import { useState , useEffect} from 'react';
   import { useDispatch, useSelector } from 'react-redux';
-  import { reset, uploadShort } from '../features/videos/VideosSlice';
+  import {  uploadShort } from '../features/videos/VideosServices';
+  import { reset } from '../features/videos/VideosSlice';
   import { useNavigate } from 'react-router-dom'
   import { validateUploadVideo } from '../app/Validate';
   

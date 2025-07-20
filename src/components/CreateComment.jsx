@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useUser } from '../contexts/User';
-import { commentOnShort, commentOnVideo } from '../features/videos/VideosSlice';
+import { commentOnShort, commentOnVideo } from '../features/videos/VideosServices';
 import Icon from './Icon';
 
 const CreateComment = ({setComments , videoId , type}) => {

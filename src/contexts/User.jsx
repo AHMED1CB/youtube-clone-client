@@ -3,7 +3,7 @@ import { useSelector , useDispatch } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom'
 import Loading from "../components/Loading";
-import { loadUser } from "../features/user/UserSlice";
+import { loadUser } from "../features/user/UserServices";
 
 export const UserContext = createContext();
 
