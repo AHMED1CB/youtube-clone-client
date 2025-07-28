@@ -4,7 +4,7 @@ export const utils =  {
     storage: "https://youtube-clone-api-dnru.onrender.com/api/storage/", // Change On Real Server 
     videosStorage: "https://youtube-clone-api-dnru.onrender.com/api/videos/", // Change On Real Server 
     join : (targetUri , nestedUri = '' , ...uris ) => {
-        let currentUri = utils.api  + targetUri +  '/' + nestedUri; 
+        let currentUri = utils.api + "/" + targetUri +  '/' + nestedUri; 
 
         uris.map(uri => {
             currentUri += `/${uri}/`
