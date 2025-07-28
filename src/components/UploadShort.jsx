@@ -33,7 +33,7 @@ import {
   
       Uploading Videos is Only Available On 
       Local Device Because The Api Server 
-      Dont Allow To use FFmpeg Or Proces Videos 
+      Dont Allow To use FFmpeg Or Proccess Videos 
   
   --------------------------------*/
   
