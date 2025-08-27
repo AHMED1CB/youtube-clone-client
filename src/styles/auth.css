@@ -36,6 +36,7 @@
 .submit-btn{
     border-color: var(--subscribe) !important;
     color: var(--subscribe) !important;
+    width: 100%;
 }
 
 
