@@ -11,7 +11,7 @@ import '../styles/VideoPage.css';
 import Loading from './Loading';
 import Icon from './Icon';
 import { useUser } from '../contexts/User';
-import {subscribeChannel} from '../features/channel/channelServices'
+import {subscribeChannel} from '../features/channel/ChannelServices'
 import RelatedVideo from './RelatedVideo'
 import Comments from './Comments';
 
