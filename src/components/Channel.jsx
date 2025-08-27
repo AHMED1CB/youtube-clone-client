@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate, useParams } from 'react-router-dom';
 import { useUser } from '../contexts/User';
 import { setChannel } from '../features/channel/channelSlice';
-import { loadChannel, subscribeChannel } from '../features/channel/channelServices';
+import { loadChannel, subscribeChannel } from '../features/channel/ChannelServices';
 import '../styles/Channel.css'; 
 import Loading from './Loading';
 import ChannelShorts from './ChannelShorts';
