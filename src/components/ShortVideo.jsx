@@ -4,7 +4,7 @@ import { utils } from "../app/utils";
 import { useEffect, useRef, useState } from "react";
 import '../styles/Shorts.css'
 import { useDispatch } from "react-redux";
-import { subscribeChannel } from "../features/channel/channelServices";
+import { subscribeChannel } from "../features/channel/ChannelServices";
 import { useNavigate } from 'react-router-dom'
 import Comments from "./Comments";
 import { reactOnShort } from "../features/videos/VideosServices";
