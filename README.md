@@ -16,3 +16,8 @@ A YouTube Clone built using React.js, Material-UI, and Redux. This project repli
 - [Redux](https://redux.js.org/)
 - [Material-UI](https://mui.com/)
 - [Vite](https://vitejs.dev/)
+
+---
+# NOTE
+
+Project Can Run With Api only on Development cuz the Hosting Doesnt allow shell Commands 
