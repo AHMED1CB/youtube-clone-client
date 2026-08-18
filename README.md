@@ -2,7 +2,7 @@
 
 A YouTube Clone built using React.js, Material-UI, and Redux. This project replicates core functionalities of YouTube, including video browsing, searching, and playback.
 
-## 🚀 Features
+##  Features
 
 - Browse videos from YouTube API
 - Search functionality with live results
@@ -10,7 +10,7 @@ A YouTube Clone built using React.js, Material-UI, and Redux. This project repli
 - Responsive design with Material-UI
 - State management using Redux
 
-## 🛠️ Built With
+##  Built With
 
 - [React.js](https://reactjs.org/)
 - [Redux](https://redux.js.org/)
